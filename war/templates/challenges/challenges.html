@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<h1>Active Challenges:</h1>
+<ul>
+{% for challenge in challenges %}
+    <li>
+        {% if challenge.get_my_model_name == "war" %}
+        <a href="{% url 'war_page' challenge.id %}">{{ challenge.title }}</a>
+        {% endif %}
+
+        {% if challenge.get_my_model_name == "riddle" %}
+        <a href="{% url 'riddle_page' challenge.id %}">{{ challenge.title }}</a>
+        {% endif %}
+    </li>
+{% endfor %}
+</ul>
+
+{% endblock %}

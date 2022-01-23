@@ -1,0 +1,19 @@
+{% extends "../challenge_base.html" %}
+{% load i18n %}
+
+{% block 'challenge_fields' %}
+
+{% comment %} {{ current_solution }} {% endcomment %}
+
+{% if user.profile.group.owner == user %}
+<form method="post" action="{{ request.path }}" enctype="multipart/form-data">
+    {% csrf_token %} 
+    {{ form.as_p }}
+
+    <input type="submit" value="{% trans 'Upload' %}" />
+    <input type="hidden" name="next" value="{{ next }}" />
+</form>
+{% endif %}
+
+{% endblock %}
+

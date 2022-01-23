@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+<meta http-equiv="refresh" content="3;url={% url 'index' %}" />
+<p>{{ error_message }}</p>
+
+{% endblock content %}

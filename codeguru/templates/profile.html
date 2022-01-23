@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+
+<div class="row my-3 p-3">
+    <h1>{{user.username}}</h1>
+    <p>{% trans "Your score is" %} {{user.profile.score}}</p>
+
+    <form method="post" action="{% url 'delete_profile' %}" onsubmit="return confirm('Are you sure?');">
+        {% csrf_token %}
+        <input type="submit" value='{% trans "Delete Profile" %}' />
+    </form>
+
+    {% if user.profile.group %}
+        <p>{% trans "Your group is" %}<a href="{% url 'group' %}">{{user.profile.group.name}} </a></p>
+    {% else %}
+        <a href="{% url 'group' %}">{% trans "Create a group" %}</a>
+    {% endif %}
+</div>
+
+{% endblock content %}

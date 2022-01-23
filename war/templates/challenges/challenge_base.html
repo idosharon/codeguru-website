@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<b>{{ challenge.title }}</b> ( {{ challenge.start_date }} -> {{ challenge.end_date }} )<br>
+description: {{ challenge.description }}<br>
+active: {{ challenge.active}}
+<br>
+
+{% if user.profile.group %}
+    {% block 'challenge_fields' %}{% endblock %}
+{% endif %}
+
+{% endblock %}

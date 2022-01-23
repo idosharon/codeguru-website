@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+{% trans "Codeguru Extreme" %}!
+<br>
+{% trans "Groups" %} ({{ groups.count }}): 
+<ul>
+{% for group in groups %}
+    <li>{{ group.name }}</li>
+{% endfor %}
+</ul>
+
+
+{% endblock %}

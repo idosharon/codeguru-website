@@ -1,0 +1,203 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-23 13:47+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % "
+"1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;\n"
+
+#: codeguru/templates/base.html:21
+msgid "Home"
+msgstr "בית"
+
+#: codeguru/templates/base.html:24
+msgid "Group"
+msgstr "קבוצות"
+
+#: codeguru/templates/base.html:25
+msgid "Challenges"
+msgstr "אתגרים"
+
+#: codeguru/templates/base.html:26
+msgid "Logged in"
+msgstr "מחובר"
+
+#: codeguru/templates/base.html:27
+msgid "Log out"
+msgstr "התנתק"
+
+#: codeguru/templates/base.html:28
+msgid "Change password"
+msgstr "שנה סיסמה"
+
+#: codeguru/templates/base.html:31 codeguru/templates/registration/login.html:9
+#: codeguru/templates/registration/password_reset_complete.html:8
+msgid "Log in"
+msgstr "התחבר"
+
+#: codeguru/templates/base.html:32
+msgid "Sign up"
+msgstr "הירשם"
+
+#: codeguru/templates/group.html:12
+msgid "Group members"
+msgstr "חברי הקבוצה"
+
+#: codeguru/templates/group.html:22
+msgid "This invite will be valid for the next 48 hours."
+msgstr "ההזמנה הזו תהיה תקפה ל48 שעות הבאות."
+
+#: codeguru/templates/group.html:23
+msgid "Use this link to join the group:"
+msgstr "השתמש בלינק הזה כדי להיכנס לקבוצה:"
+
+#: codeguru/templates/group.html:24
+msgid "Click here to join."
+msgstr "לחץ כאן כדי להצטרף."
+
+#: codeguru/templates/group.html:25
+msgid "Copy Link"
+msgstr "העתק לינק"
+
+#: codeguru/templates/group.html:35
+msgid "There is no invite code for the group yet, you can create one here:"
+msgstr "אין לינק הזמנה לקבוצה עדיין, ניתן ליצור אחד כאן:"
+
+#: codeguru/templates/group.html:39
+msgid "Generate Invite Link"
+msgstr "צור קישור הזמנה"
+
+#: codeguru/templates/group.html:44
+msgid "Leave Group"
+msgstr "צא מהקבוצה"
+
+#: codeguru/templates/group.html:48
+msgid "You are not associated with any group, try to create a new one:"
+msgstr "אינך משוייך לשום קבוצה, אתה יכול ליצור אחת חדשה כאן:"
+
+#: codeguru/templates/group.html:49
+msgid "Create Group:"
+msgstr "צור קבוצה:"
+
+#: codeguru/templates/group.html:54
+msgid "New Group"
+msgstr "קבוצה חדשה"
+
+#: codeguru/templates/index.html:5
+msgid "Codeguru Extreme"
+msgstr "Codeguru Extreme"
+
+#: codeguru/templates/index.html:7
+msgid "Groups"
+msgstr "קבוצות"
+
+#: codeguru/templates/profile.html:7
+msgid "Your score is"
+msgstr "הניקוד שלך הוא"
+
+#: codeguru/templates/profile.html:11
+msgid "Delete Profile"
+msgstr "מחק פרופיל"
+
+#: codeguru/templates/profile.html:15
+msgid "Your group is"
+msgstr "הקבוצה שלך היא"
+
+#: codeguru/templates/profile.html:17
+msgid "Create a group"
+msgstr "צור קבוצה"
+
+#: codeguru/templates/registration/activate.html:6
+msgid "Account activation failed"
+msgstr ""
+
+#: codeguru/templates/registration/activation_complete.html:5
+msgid "Your account is now activated."
+msgstr ""
+
+#: codeguru/templates/registration/activation_email.txt:2
+msgid "Activate account at"
+msgstr ""
+
+#: codeguru/templates/registration/activation_email.txt:6
+#, python-format
+msgid "Link is valid for %(expiration_days)s days."
+msgstr ""
+
+#: codeguru/templates/registration/activation_email_subject.txt:1
+msgid "Account activation on"
+msgstr ""
+
+#: codeguru/templates/registration/login.html:13
+msgid "Forgot password"
+msgstr "שכחת סיסמה"
+
+#: codeguru/templates/registration/login.html:13
+msgid "Reset it"
+msgstr "שחזר סיסמה"
+
+#: codeguru/templates/registration/login.html:14
+msgid "Not member"
+msgstr "לא משתמש"
+
+#: codeguru/templates/registration/login.html:14
+msgid "Register"
+msgstr "הירשם"
+
+#: codeguru/templates/registration/logout.html:5
+msgid "Logged out"
+msgstr "מנותק"
+
+#: codeguru/templates/registration/password_change_done.html:5
+msgid "Password changed"
+msgstr "סיסמה שונתה"
+
+#: codeguru/templates/registration/password_change_form.html:9
+#: codeguru/templates/registration/password_reset_confirm.html:12
+#: codeguru/templates/registration/password_reset_form.html:9
+#: codeguru/templates/registration/registration_form.html:9
+msgid "Submit"
+msgstr "שלח"
+
+#: codeguru/templates/registration/password_reset_complete.html:6
+msgid "Password reset successfully"
+msgstr "סיסמה שוחזרה בהצלחה"
+
+#: codeguru/templates/registration/password_reset_confirm.html:17
+msgid "Password reset failed"
+msgstr "שחזור הסיסמה נכשל"
+
+#: codeguru/templates/registration/password_reset_done.html:5
+msgid "Email with password reset instructions has been sent."
+msgstr "נשלח מייל עם הוראות לשחזור הסיסמה"
+
+#: codeguru/templates/registration/password_reset_email.html:2
+#, python-format
+msgid "Reset password at %(site_name)s"
+msgstr "שחזר סיסמה ב-%(site_name)s"
+
+#: codeguru/templates/registration/password_reset_subject.txt:3
+#, python-format
+msgid "Password reset on %(site_name)s"
+msgstr "שחזר סיסמה ב-%(site_name)s"
+
+#: codeguru/templates/registration/registration_closed.html:5
+msgid "Registration is currently closed."
+msgstr "הרשמה כרגע סגורה"
+
+#: codeguru/templates/registration/registration_complete.html:5
+msgid "You are now registered. Activation email sent."
+msgstr ""

@@ -1,0 +1,23 @@
+{% extends "../challenge_base.html" %}
+{% load i18n %}
+
+{% block 'challenge_fields' %}
+
+{% if user.profile.group.owner == user %}
+<form method="post" action=".">
+    {% csrf_token %} 
+    {% regroup form by field.group as field_groups %}
+    {% for field_group in field_groups %}
+        <br>Survivor {{field_group.grouper}}<br>
+        {% for field in field_group.list %}
+            {{field.label}}
+            {{field}}<br>
+        {% endfor %}
+    {% endfor %}
+
+    <br><input type="submit" value="{% trans 'Upload' %}" />
+    <input type="hidden" name="next" value="{{ next }}" />
+</form>
+{% endif %}
+    
+{% endblock %}
