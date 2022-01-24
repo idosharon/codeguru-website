@@ -5,6 +5,7 @@ from django.dispatch import receiver
 from django.utils.crypto import get_random_string
 from datetime import datetime, timedelta
 from django.utils import timezone
+from django.core.exceptions import ValidationError
 
 # def validate_length(value):
 #     return len(value) == 3
@@ -15,9 +16,14 @@ CENTER_CHOICES = [
     ('GSA', 'Green Start Academy'),
 ]
 
+def group_name_validator(name):
+    if ' ' in name:
+        raise ValidationError("Spaces are not allowed in group name.")
+    return name
+
 
 class CgGroup(models.Model):
-    name = models.CharField(max_length=30, unique=True)
+    name = models.CharField(max_length=30, unique=True, validators=[group_name_validator])
     # acronym = models.CharField(max_length=3, validators=[validate_length], unique=True)
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
     center = models.CharField(

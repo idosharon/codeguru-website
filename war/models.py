@@ -27,8 +27,8 @@ class Challenge(models.Model):
 
 # TODO: change filename to defined pattern with group name and war
 
-
 def war_directory_path(instance, filename):
+    name = instance.group.name.replace(" ", "_") + filename
     if instance.group is None:
         return join(instance.war.id, 'zombies', filename)
     return join(instance.war.id, instance.group.id, filename)
@@ -73,3 +73,4 @@ class RiddleSolution(models.Model):
     riddle = models.ForeignKey(Riddle, on_delete=models.CASCADE)
     group = models.ForeignKey(CgGroup, null=True, on_delete=models.CASCADE)
     riddle_solution = models.FileField(upload_to=riddle_directory_path)
+    upload_date = models.DateTimeField(auto_now_add=True)
