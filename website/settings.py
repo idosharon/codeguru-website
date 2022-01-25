@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-981u2varivq2*&fii*ouiptem(k(%+)akw-!i2fz&&h7y(n9f)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['147.182.223.196','submit.codeguru.co.il', 'www.submit.codeguru.co.il']
+ALLOWED_HOSTS = []
 
 # Application definition
 
