@@ -44,7 +44,7 @@
         {% trans "Logged in" %}: <a href="{% url 'profile' %}">{{ user.username }}</a>
         (<a href="{% url 'logout' %}">{% trans "Log out" %}</a> | 
         <a href="{% url 'password_change' %}">{% trans "Change password" %}</a>)
-        <img src="{{user.profile.picture.url}}" style="height:1em"/>
+        {% comment %} <img src="{{user.profile.picture.url}}" style="height:1em"/> {% endcomment %}
     {% else %}
        <a href="{% url 'login' %}">{% trans "Log in" %}</a> | 
        <a href="{% url 'register' %}">{% trans "Sign up" %}</a>
