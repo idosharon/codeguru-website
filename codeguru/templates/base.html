@@ -55,7 +55,7 @@
         <input name="language" type="hidden" value="he" />
         <input type="image" src="{% static 'codeguru/he.svg' %}" style="height:1em"/> 
         <input type="submit" value="Hebrew" />
-    </form> {% endcomment %}
+    </form> 
     &nbsp;
     <form action="{% url 'set_language' %}" method="POST" style="display:inline;">
         {% csrf_token %}
