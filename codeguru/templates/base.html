@@ -7,11 +7,11 @@
 <head>
     <link rel="stylesheet" href="{{ STATIC_URL }}style.css" />
     <title>{% block title %}Codeguru X{% endblock %}</title>
-    {% ifequal LANGUAGE_CODE "he" %}
+    {% if LANGUAGE_CODE == "he" %}
         <style> html { direction: rtl} </style>
     {% else %}
         <style> html { direction: ltr} </style>
-    {% endifequal %}
+    {% endif %}
 </head>
 
 <style>
