@@ -1,17 +1,17 @@
 {% load static %}
-{% load i18n %}
-{% get_current_language as LANGUAGE_CODE %}
+{% comment %} {% load i18n %}
+{% get_current_language as LANGUAGE_CODE %} {% endcomment %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <link rel="stylesheet" href="{{ STATIC_URL }}style.css" />
     <title>{% block title %}Codeguru X{% endblock %}</title>
-    {% if LANGUAGE_CODE == "he" %}
+    {% comment %} {% if LANGUAGE_CODE == "he" %}
         <style> html { direction: rtl} </style>
     {% else %}
         <style> html { direction: ltr} </style>
-    {% endif %}
+    {% endif %} {% endcomment %}
 </head>
 
 <style>
