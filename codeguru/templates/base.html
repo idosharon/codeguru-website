@@ -1,17 +1,17 @@
 {% load static %}
 {% load i18n %}
-{% comment %} {% get_current_language as LANGUAGE_CODE %} {% endcomment %} 
+{% get_current_language as LANGUAGE_CODE %} 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <link rel="stylesheet" href="{{ STATIC_URL }}style.css" />
     <title>{% block title %}Codeguru X{% endblock %}</title>
-    {% comment %} {% if LANGUAGE_CODE == "he" %}
+    {% if LANGUAGE_CODE == "he" %}
         <style> html { direction: rtl} </style>
     {% else %}
         <style> html { direction: ltr} </style>
-    {% endif %} {% endcomment %}
+    {% endif %}
 </head>
 
 <style>
@@ -49,21 +49,21 @@
        <a href="{% url 'login' %}">{% trans "Log in" %}</a> | 
        <a href="{% url 'register' %}">{% trans "Sign up" %}</a>
     {% endif %} | 
-    {% comment %} <form action="{% url 'set_language' %}" method="POST" style="display: inline;">
+    <form action="{% url 'set_language' %}" method="POST" style="display: inline;">
         {% csrf_token %}
         <input name="next" type="hidden" value="{{ request.path }}" />
         <input name="language" type="hidden" value="he" />
         <input type="image" src="{% static 'codeguru/he.svg' %}" style="height:1em"/> 
         <input type="submit" value="Hebrew" />
     </form> {% endcomment %}
-    {% comment %} &nbsp;
+    &nbsp;
     <form action="{% url 'set_language' %}" method="POST" style="display:inline;">
         {% csrf_token %}
         <input name="next" type="hidden" value="{{ request.path }}" />
         <input name="language" type="hidden" value="en" />
         <input type="image" src="{% static 'codeguru/en.svg' %}" style="height:1em"/> 
         <input type="submit" value="English" />
-    </form> {% endcomment %}
+    </form>
     <hr />
     {% endblock %}
     </div>
