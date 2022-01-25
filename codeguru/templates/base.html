@@ -53,7 +53,7 @@
         {% csrf_token %}
         <input name="next" type="hidden" value="{{ request.path }}" />
         <input name="language" type="hidden" value="he" />
-        <input type="image" src="{% static 'codeguru/he.svg' %}" style="height:1em"/> 
+        {% comment %} <input type="image" src="{% static 'codeguru/he.svg' %}" style="height:1em"/>  {% endcomment %}
         <input type="submit" value="Hebrew" />
     </form> 
     &nbsp;
@@ -61,7 +61,7 @@
         {% csrf_token %}
         <input name="next" type="hidden" value="{{ request.path }}" />
         <input name="language" type="hidden" value="en" />
-        <input type="image" src="{% static 'codeguru/en.svg' %}" style="height:1em"/> 
+        {% comment %} <input type="image" src="{% static 'codeguru/en.svg' %}" style="height:1em"/>  {% endcomment %}
         <input type="submit" value="English" />
     </form>
     <hr />
