@@ -56,14 +56,14 @@
         <input type="image" src="{% static 'codeguru/he.svg' %}" style="height:1em"/> 
         <input type="submit" value="Hebrew" />
     </form> {% endcomment %}
-    &nbsp;
+    {% comment %} &nbsp;
     <form action="{% url 'set_language' %}" method="POST" style="display:inline;">
         {% csrf_token %}
         <input name="next" type="hidden" value="{{ request.path }}" />
         <input name="language" type="hidden" value="en" />
-        {% comment %} <input type="image" src="{% static 'codeguru/en.svg' %}" style="height:1em"/> {% endcomment %}
+        <input type="image" src="{% static 'codeguru/en.svg' %}" style="height:1em"/> 
         <input type="submit" value="English" />
-    </form>
+    </form> {% endcomment %}
     <hr />
     {% endblock %}
     </div>
