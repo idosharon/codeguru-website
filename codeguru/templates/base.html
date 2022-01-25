@@ -53,7 +53,7 @@
         {% csrf_token %}
         <input name="next" type="hidden" value="{{ request.path }}" />
         <input name="language" type="hidden" value="he" />
-        {% comment %} <input type="image" src="{% static 'codeguru/he.svg' %}" style="height:1em"/> {% endcomment %}
+        <input type="image" src="{% static 'codeguru/he.svg' %}" style="height:1em"/> 
         <input type="submit" value="Hebrew" />
     </form> {% endcomment %}
     &nbsp;
