@@ -29,12 +29,12 @@ class Challenge(models.Model):
 
 def war_directory_path(instance, filename, file_type):
     if instance.group is None:
-        return join("wars", "wars_zombies", instance.war.id, 'zombies', splitext(filename)[0] + "." + file_type)
-    return join("wars", "wars_submissions", instance.war.id, instance.group.id, splitext(filename)[0] + "_survivor." + file_type)
+        return join("wars", "zombies", instance.war.id, splitext(filename)[0] + "." + file_type)
+    return join("wars", "submissions", instance.war.id, instance.group.id, splitext(filename)[0] + "_survivor." + file_type)
 
 
 def riddle_directory_path(instance, filename):
-    return join("riddles", str(instance.riddle.id), instance.group.id, "solution.zip")
+    return join("riddles", instance.group.id, "solution.zip")
 
 
 class War(Challenge):
