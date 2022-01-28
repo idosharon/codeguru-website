@@ -123,12 +123,15 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'  # Public URL at the browser
 
+PRIVATE_STORAGE_ROOT = os.path.join(BASE_DIR, "data")
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-cg_user, cg_paswd = os.getenv("cg_mail_user", None), os.getenv("cg_mail_paswd", None)
+cg_user, cg_paswd = os.getenv(
+    "cg_mail_user", None), os.getenv("cg_mail_paswd", None)
 
 if cg_user and cg_paswd:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

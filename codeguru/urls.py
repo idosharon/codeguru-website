@@ -16,4 +16,4 @@ urlpatterns = [
     path('invite/', RedirectView.as_view(pattern_name='index', permanent=True)),
     path('group/leave', views.leave_group, name="leave_group"),
     path('set_lang', views.set_lang, name="set_language"),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]

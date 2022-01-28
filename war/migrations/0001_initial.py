@@ -18,7 +18,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Riddle',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=100, unique=True)),
                 ('description', models.TextField()),
                 ('start_date', models.DateTimeField()),
@@ -31,12 +32,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='War',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=100, unique=True)),
                 ('description', models.TextField()),
                 ('start_date', models.DateTimeField()),
                 ('end_date', models.DateTimeField()),
-                ('amount_of_survivors', models.PositiveIntegerField(default=2, validators=[django.core.validators.MinValueValidator(1)])),
+                ('amount_of_survivors', models.PositiveIntegerField(
+                    default=2, validators=[django.core.validators.MinValueValidator(1)])),
                 ('zombie_mode', models.BooleanField(default=False)),
             ],
             options={
@@ -46,21 +49,30 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Survivor',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('asm_file', models.FileField(upload_to=war.models.war_directory_path, validators=[war.models.asm_max])),
-                ('bin_file', models.FileField(upload_to=war.models.war_directory_path, validators=[war.models.bin_max])),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('asm_file', models.FileField(
+                    upload_to=war.models.war_directory_path, validators=[war.models.asm_max])),
+                ('bin_file', models.FileField(
+                    upload_to=war.models.war_directory_path, validators=[war.models.bin_max])),
                 ('result', models.PositiveIntegerField(default=0)),
-                ('group', models.ForeignKey(editable=False, null=True, on_delete=django.db.models.deletion.CASCADE, to='codeguru.cggroup')),
-                ('war', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='war.war')),
+                ('group', models.ForeignKey(editable=False, null=True,
+                 on_delete=django.db.models.deletion.CASCADE, to='codeguru.cggroup')),
+                ('war', models.ForeignKey(null=True,
+                 on_delete=django.db.models.deletion.CASCADE, to='war.war')),
             ],
         ),
         migrations.CreateModel(
             name='RiddleSolution',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('riddle_solution', models.FileField(upload_to=war.models.riddle_directory_path)),
-                ('group', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='codeguru.cggroup')),
-                ('riddle', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='war.riddle')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('riddle_solution', models.FileField(
+                    upload_to=war.models.riddle_directory_path)),
+                ('group', models.ForeignKey(
+                    null=True, on_delete=django.db.models.deletion.CASCADE, to='codeguru.cggroup')),
+                ('riddle', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='war.riddle')),
             ],
         ),
     ]

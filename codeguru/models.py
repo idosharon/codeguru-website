@@ -16,6 +16,7 @@ CENTER_CHOICES = [
     ('GSA', 'Green Start Academy'),
 ]
 
+
 def group_name_validator(name):
     if ' ' in name:
         raise ValidationError("Spaces are not allowed in group name.")
@@ -23,7 +24,8 @@ def group_name_validator(name):
 
 
 class CgGroup(models.Model):
-    name = models.CharField(max_length=30, unique=True, validators=[group_name_validator])
+    name = models.CharField(max_length=30, unique=True,
+                            validators=[group_name_validator])
     # acronym = models.CharField(max_length=3, validators=[validate_length], unique=True)
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
     center = models.CharField(
@@ -47,8 +49,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     group = models.ForeignKey(CgGroup, null=True, on_delete=models.SET_NULL)
     score = models.IntegerField(default=0)
-    picture = models.ImageField(
-        upload_to='profile_pics', default='profile_pics/default.jpg')
+    # picture = models.ImageField(
+    #     upload_to='profile_pics', default='profile_pics/default.jpg')
 
     def __str__(self):
         return f"Profile of {self.user.username}"

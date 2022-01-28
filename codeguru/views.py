@@ -8,7 +8,7 @@ from django.utils import translation
 from django.http import HttpResponse
 
 
-def error(request, msg):
+def error(request, msg, r404=False):
     return render(request, "error.html", {"error_message": msg})
 
 

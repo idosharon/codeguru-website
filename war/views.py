@@ -1,11 +1,14 @@
 from django.shortcuts import redirect, render
 from numpy import right_shift
-from .models import RiddleSolution, War, Riddle
+from .models import RiddleSolution, War, Riddle, Survivor, warrior_storage
 from itertools import chain
 from codeguru.views import error
 from codeguru.models import CgGroup
 from django.contrib.auth.decorators import login_required
 from .forms import SurvivorSubmissionForm, RiddleSubmissionForm
+from django.http import FileResponse, HttpResponseNotFound
+from os.path import join
+import re
 
 
 def challenges(request):
@@ -38,10 +41,38 @@ def riddle_page(request, id):
 
 
 @login_required
+def download(request, id, filename):
+    if not re.compile(r"(bin|asm)_\d+").match(filename):
+        return HttpResponseNotFound('Not Found: Bad filename')
+    try:
+        group = request.user.profile.group
+        war = War.objects.get(id=id)
+        path = join("wars", "submissions", str(
+            war.id), str(group.id), filename)
+        response = FileResponse(warrior_storage.open(
+            path, 'rb'), content_type='application/force-download')
+        response['Content-Disposition'] = f'attachment; filename="{filename}"'
+        return response
+    except:
+        return HttpResponseNotFound('Not Found')
+
+
+@login_required
 def war_page(request, id):
     try:
         war = War.objects.get(id=id)
         form = SurvivorSubmissionForm(war=war)
-        return render(request, 'challenges/wars/war_page.html', {'challenge': war, 'form': form})
+        group = request.user.profile.group
+
+        if request.method == 'POST':
+            form = SurvivorSubmissionForm(request.POST, request.FILES, war=war)
+            if form.is_valid():
+                for surv in Survivor.objects.filter(group=group, war=war):
+                    surv.delete()
+                for i in range(1, war.amount_of_survivors + 1):
+                    Survivor(
+                        group=group, war=war, asm_file=form.files[f'asm_{i}'], bin_file=form.files[f'bin_{i}'], warrior_file_idx=i).save()
+
+        return render(request, 'challenges/wars/war_page.html', {'challenge': war, 'form': form, 'prev_upload': Survivor.objects.filter(group=group, war=war).first()})
     except War.DoesNotExist:
         return error(request, 'War not found')

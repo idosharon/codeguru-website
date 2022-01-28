@@ -4,15 +4,21 @@
 {% block 'challenge_fields' %}
 
 {% if user.profile.group.owner == user %}
-<form method="post" action=".">
-    {% csrf_token %} 
+<form enctype="multipart/form-data" method="post" action="{{ challenge.id }}">
+    {% csrf_token %}
+    {{ form.errors }}
     {% regroup form by field.group as field_groups %}
     {% for field_group in field_groups %}
         <br>Survivor {{field_group.grouper}}<br>
         {% for field in field_group.list %}
             {{field.label}}
-            {{field}}<br>
-        {% endfor %}
+            {{field}}
+            {% if prev_upload %}
+                Last update: {{ prev_upload.upload_date }} <br>
+                <a href="{% url 'war_download' id=challenge.id filename=field.name %}" download="proposed_file_name">Download</a>
+            {% endif %}
+            <br>
+        {% endfor %} 
     {% endfor %}
 
     <br><input type="submit" value="{% trans 'Upload' %}" />

@@ -14,16 +14,19 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='cggroup',
             name='name',
-            field=models.CharField(max_length=30, unique=True, validators=[codeguru.models.group_name_validator]),
+            field=models.CharField(max_length=30, unique=True, validators=[
+                                   codeguru.models.group_name_validator]),
         ),
         migrations.AlterField(
             model_name='invite',
             name='code',
-            field=models.CharField(default='hOAsSdZG6xMkLEjPVAO6K0r1WBwpfeDQNK9FA1NQHe83aiWISCby5uQiknUo0yCt', max_length=64, unique=True),
+            field=models.CharField(
+                default='hOAsSdZG6xMkLEjPVAO6K0r1WBwpfeDQNK9FA1NQHe83aiWISCby5uQiknUo0yCt', max_length=64, unique=True),
         ),
         migrations.AlterField(
             model_name='profile',
             name='picture',
-            field=models.ImageField(default='profile_pics/default.jpg', upload_to='profile_pics'),
+            field=models.ImageField(
+                default='profile_pics/default.jpg', upload_to='profile_pics'),
         ),
     ]

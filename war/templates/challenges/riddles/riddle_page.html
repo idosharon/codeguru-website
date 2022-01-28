@@ -6,6 +6,7 @@
 {% comment %} {{ current_solution }} {% endcomment %}
 
 {% if user.profile.group.owner == user %}
+<strong>Please upload .zip file</strong>
 <form method="post" action="{{ request.path }}" enctype="multipart/form-data">
     {% csrf_token %} 
     {{ form.as_p }}

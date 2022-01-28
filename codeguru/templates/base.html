@@ -1,83 +1,110 @@
-{% load static %}
-{% load i18n %}
-{% get_current_language as LANGUAGE_CODE %} 
+{% load static %} {% load i18n %} {% get_current_language as LANGUAGE_CODE %}
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <link rel="stylesheet" href="{{ STATIC_URL }}style.css" />
     <title>{% block title %}Codeguru X{% endblock %}</title>
     {% if LANGUAGE_CODE == "he" %}
-        <style> html { direction: rtl} </style>
+    <style>
+      html {
+        direction: rtl;
+      }
+    </style>
     {% else %}
-        <style> html { direction: ltr} </style>
+    <style>
+      html {
+        direction: ltr;
+      }
+    </style>
     {% endif %}
-</head>
+  </head>
 
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
-    * { 
-        font-size: 25px; 
-        color: #4AF626;
-        font-family: 'Roboto Mono', monospace;
-        background-color: #000000; 
-        outline: none;
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Space+Mono&display=swap");
+    * {
+      font-size: 25px;
+      color: #4af626;
+      font-family: "Roboto Mono", monospace;
+      background-color: #000000;
+      outline: none;
     }
 
     input {
-        border: 5px solid green;
+      border: 5px solid green;
     }
-    
-</style>
+  </style>
 
-<body>
+  <body>
     <div id="header">
-        
-    {% block header %}
-    {% comment %} <img src="{% static 'codeguru/logo.svg' %}" alt="logo" style="height: 7em; margin-bottom: 40px;"/><br> {% endcomment %}
-    <h1>CodeGuru Extreme</h1><br>
-    <a href="{% url 'index' %}">{% trans "Home" %}</a> | 
-
-    {% if user.is_authenticated %}
-        <a href="{% url 'group' %}">{% trans "Group" %}</a> | 
-        <a href="{% url 'challenges' %}">{% trans "Challenges" %}</a> | 
-        {% trans "Logged in" %}: <a href="{% url 'profile' %}">{{ user.username }}</a>
-        (<a href="{% url 'logout' %}">{% trans "Log out" %}</a> | 
-        <a href="{% url 'password_change' %}">{% trans "Change password" %}</a>)
-        {% comment %} <img src="{{user.profile.picture.url}}" style="height:1em"/> {% endcomment %}
-    {% else %}
-       <a href="{% url 'login' %}">{% trans "Log in" %}</a> | 
-       <a href="{% url 'register' %}">{% trans "Sign up" %}</a>
-    {% endif %} | 
-    <form action="{% url 'set_language' %}" method="POST" style="display: inline;">
+      {% block header %} {% comment %}
+      <img
+        src="{% static 'codeguru/logo.svg' %}"
+        alt="logo"
+        style="height: 7em; margin-bottom: 40px"
+      /><br />
+      {% endcomment %}
+      <h1>CodeGuru Extreme</h1>
+      <br />
+      <a href="{% url 'index' %}">{% trans "Home" %}</a> | {% if
+      user.is_authenticated %}
+      <a href="{% url 'group' %}">{% trans "Group" %}</a> |
+      <a href="{% url 'challenges' %}">{% trans "Challenges" %}</a> | {% trans
+      "Logged in" %}: <a href="{% url 'profile' %}">{{ user.username }}</a> (<a
+        href="{% url 'logout' %}"
+        >{% trans "Log out" %}</a
+      >
+      | <a href="{% url 'password_change' %}">{% trans "Change password" %}</a>)
+      {% comment %}
+      <img src="{{user.profile.picture.url}}" style="height: 1em" /> {%
+      endcomment %} {% else %}
+      <a href="{% url 'login' %}">{% trans "Log in" %}</a> |
+      <a href="{% url 'register' %}">{% trans "Sign up" %}</a>
+      {% endif %} |
+      <form
+        action="{% url 'set_language' %}"
+        method="POST"
+        style="display: inline"
+      >
         {% csrf_token %}
         <input name="next" type="hidden" value="{{ request.path }}" />
         <input name="language" type="hidden" value="he" />
-        {% comment %} <input type="image" src="{% static 'codeguru/he.svg' %}" style="height:1em"/>  {% endcomment %}
+        {% comment %}
+        <input
+          type="image"
+          src="{% static 'codeguru/he.svg' %}"
+          style="height: 1em"
+        />
+        {% endcomment %}
         <input type="submit" value="Hebrew" />
-    </form> 
-    &nbsp;
-    <form action="{% url 'set_language' %}" method="POST" style="display:inline;">
+      </form>
+      &nbsp;
+      <form
+        action="{% url 'set_language' %}"
+        method="POST"
+        style="display: inline"
+      >
         {% csrf_token %}
         <input name="next" type="hidden" value="{{ request.path }}" />
         <input name="language" type="hidden" value="en" />
-        {% comment %} <input type="image" src="{% static 'codeguru/en.svg' %}" style="height:1em"/>  {% endcomment %}
+        {% comment %}
+        <input
+          type="image"
+          src="{% static 'codeguru/en.svg' %}"
+          style="height: 1em"
+        />
+        {% endcomment %}
         <input type="submit" value="English" />
-    </form>
-    <hr />
-    {% endblock %}
+      </form>
+      <hr />
+      {% endblock %}
     </div>
 
-    <div id="content">
-    
-    {% block content %}{% endblock %}
-    </div>
+    <div id="content">{% block content %}{% endblock %}</div>
 
     <div id="footer">
-    {% block footer %}
-        <hr />
-    {% endblock %}
+      {% block footer %}
+      <hr />
+      {% endblock %}
     </div>
-</body>
-
+  </body>
 </html>

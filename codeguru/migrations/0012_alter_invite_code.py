@@ -13,6 +13,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='invite',
             name='code',
-            field=models.CharField(default='oTxVScPQ0WRyecNttXNLhPIljOUmOJSIQjGwfmkzbpJ5N5Gy0NOY1rf59gIjGOXp', max_length=64, unique=True),
+            field=models.CharField(
+                default='oTxVScPQ0WRyecNttXNLhPIljOUmOJSIQjGwfmkzbpJ5N5Gy0NOY1rf59gIjGOXp', max_length=64, unique=True),
         ),
     ]
