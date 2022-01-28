@@ -14,7 +14,7 @@
             {{field.label}}
             {{field}}
             {% if prev_upload %}
-                Last update: {{ prev_upload.upload_date }} <br>
+                Last update: {{ prev_upload.upload_date }}
                 <a href="{% url 'war_download' id=challenge.id filename=field.name %}" download="proposed_file_name">Download</a>
             {% endif %}
             <br>

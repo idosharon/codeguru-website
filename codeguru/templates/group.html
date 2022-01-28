@@ -11,7 +11,7 @@
         <p>{% trans "Group members" %}:</p>
         <ul>
         {% for member in members %}
-            <li>{{member.user.username}} {% if member.user == user.profile.group.owner %}(Owner){% endif %}
+            <li>{{member.user.username}} {% if member.user == user.profile.group.owner %}({% trans "Owner" %}){% endif %}
             </li>
         {% endfor %}
         </ul>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-23 13:47+0000\n"
+"POT-Creation-Date: 2022-01-28 16:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,42 +19,58 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % "
 "1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;\n"
 
-#: codeguru/templates/base.html:21
+#: codeguru/templates/base.html:40
 msgid "Home"
 msgstr "בית"
 
-#: codeguru/templates/base.html:24
+#: codeguru/templates/base.html:43
 msgid "Group"
 msgstr "קבוצות"
 
-#: codeguru/templates/base.html:25
+#: codeguru/templates/base.html:44
 msgid "Challenges"
 msgstr "אתגרים"
 
-#: codeguru/templates/base.html:26
+#: codeguru/templates/base.html:46
+msgid "Admin"
+msgstr "ניהול"
+
+#: codeguru/templates/base.html:48
 msgid "Logged in"
 msgstr "מחובר"
 
-#: codeguru/templates/base.html:27
+#: codeguru/templates/base.html:49
 msgid "Log out"
 msgstr "התנתק"
 
-#: codeguru/templates/base.html:28
+#: codeguru/templates/base.html:50
 msgid "Change password"
 msgstr "שנה סיסמה"
 
-#: codeguru/templates/base.html:31 codeguru/templates/registration/login.html:9
+#: codeguru/templates/base.html:53 codeguru/templates/registration/login.html:9
 #: codeguru/templates/registration/password_reset_complete.html:8
 msgid "Log in"
 msgstr "התחבר"
 
-#: codeguru/templates/base.html:32
+#: codeguru/templates/base.html:54
 msgid "Sign up"
 msgstr "הירשם"
 
-#: codeguru/templates/group.html:12
+#: codeguru/templates/base.html:62
+msgid "Hebrew"
+msgstr "עברית"
+
+#: codeguru/templates/base.html:71
+msgid "English"
+msgstr "אנגלית"
+
+#: codeguru/templates/group.html:11
 msgid "Group members"
 msgstr "חברי הקבוצה"
+
+#: codeguru/templates/group.html:14
+msgid "Owner"
+msgstr "מייסד"
 
 #: codeguru/templates/group.html:22
 msgid "This invite will be valid for the next 48 hours."
@@ -65,18 +81,14 @@ msgid "Use this link to join the group:"
 msgstr "השתמש בלינק הזה כדי להיכנס לקבוצה:"
 
 #: codeguru/templates/group.html:24
-msgid "Click here to join."
-msgstr "לחץ כאן כדי להצטרף."
-
-#: codeguru/templates/group.html:25
 msgid "Copy Link"
 msgstr "העתק לינק"
 
-#: codeguru/templates/group.html:35
+#: codeguru/templates/group.html:34
 msgid "There is no invite code for the group yet, you can create one here:"
 msgstr "אין לינק הזמנה לקבוצה עדיין, ניתן ליצור אחד כאן:"
 
-#: codeguru/templates/group.html:39
+#: codeguru/templates/group.html:38
 msgid "Generate Invite Link"
 msgstr "צור קישור הזמנה"
 
@@ -92,7 +104,7 @@ msgstr "אינך משוייך לשום קבוצה, אתה יכול ליצור א
 msgid "Create Group:"
 msgstr "צור קבוצה:"
 
-#: codeguru/templates/group.html:54
+#: codeguru/templates/group.html:55
 msgid "New Group"
 msgstr "קבוצה חדשה"
 
@@ -122,24 +134,24 @@ msgstr "צור קבוצה"
 
 #: codeguru/templates/registration/activate.html:6
 msgid "Account activation failed"
-msgstr ""
+msgstr "הפעלת החשבון נכשלה"
 
 #: codeguru/templates/registration/activation_complete.html:5
 msgid "Your account is now activated."
-msgstr ""
+msgstr "החשבון שלך הופעל."
 
 #: codeguru/templates/registration/activation_email.txt:2
 msgid "Activate account at"
-msgstr ""
+msgstr " הפעל חשבון ב"
 
 #: codeguru/templates/registration/activation_email.txt:6
 #, python-format
 msgid "Link is valid for %(expiration_days)s days."
-msgstr ""
+msgstr "תוקף הקישור הוא %(expiration_days)s ימים."
 
 #: codeguru/templates/registration/activation_email_subject.txt:1
 msgid "Account activation on"
-msgstr ""
+msgstr "החשבון פעיל"
 
 #: codeguru/templates/registration/login.html:13
 msgid "Forgot password"
@@ -200,4 +212,12 @@ msgstr "הרשמה כרגע סגורה"
 
 #: codeguru/templates/registration/registration_complete.html:5
 msgid "You are now registered. Activation email sent."
-msgstr ""
+msgstr "נרשמת בהצלחה. נשלח מייל להפעלה."
+
+#: war/templates/challenges/riddles/riddle_page.html:15
+#: war/templates/challenges/wars/war_page.html:24
+msgid "Upload"
+msgstr "שלח"
+
+#~ msgid "Click here to join."
+#~ msgstr "לחץ כאן כדי להצטרף."

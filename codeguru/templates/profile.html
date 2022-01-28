@@ -12,7 +12,7 @@
     </form>
 
     {% if user.profile.group %}
-        <p>{% trans "Your group is" %}<a href="{% url 'group' %}">{{user.profile.group.name}} </a></p>
+        <p>{% trans "Your group is" %} <a href="{% url 'group' %}">{{user.profile.group.name}} </a></p>
     {% else %}
         <a href="{% url 'group' %}">{% trans "Create a group" %}</a>
     {% endif %}
