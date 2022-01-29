@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-29 13:21+0200\n"
+"POT-Creation-Date: 2022-01-29 18:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % "
 "1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;\n"
+
+#: codeguru/templates/base.html:39
+msgid "CodeGuru Extreme"
+msgstr "קודגורו אקסטרים"
 
 #: codeguru/templates/base.html:40
 msgid "Home"
@@ -104,13 +108,17 @@ msgstr "אינך משוייך לשום קבוצה, אתה יכול ליצור א
 msgid "Create Group:"
 msgstr "צור קבוצה:"
 
+#: codeguru/templates/group.html:52
+msgid "Note: Spaces are not allowed in the group name."
+msgstr "שים לב: אין להשתמש ברווחים בשם הקבוצה."
+
 #: codeguru/templates/group.html:55
 msgid "New Group"
 msgstr "קבוצה חדשה"
 
 #: codeguru/templates/index.html:5
 msgid "Codeguru Extreme"
-msgstr "Codeguru Extreme"
+msgstr "קודגורו אקסטרים"
 
 #: codeguru/templates/index.html:7
 msgid "Groups"
@@ -153,6 +161,10 @@ msgstr "תוקף הקישור הוא %(expiration_days)s ימים."
 msgid "Account activation on"
 msgstr "החשבון פעיל"
 
+#: codeguru/templates/registration/logged_out.html:7
+msgid "Logged out."
+msgstr "התנתקת בהצלחה."
+
 #: codeguru/templates/registration/login.html:13
 msgid "Forgot password"
 msgstr "שכחת סיסמה"
@@ -166,12 +178,10 @@ msgid "Not member"
 msgstr "לא משתמש"
 
 #: codeguru/templates/registration/login.html:14
+#: codeguru/templates/registration/register.html:6
+#: codeguru/templates/registration/register.html:10
 msgid "Register"
 msgstr "הירשם"
-
-#: codeguru/templates/registration/logout.html:5
-msgid "Logged out"
-msgstr "מנותק"
 
 #: codeguru/templates/registration/password_change_done.html:5
 msgid "Password changed"
@@ -206,6 +216,18 @@ msgstr "שחזר סיסמה ב-%(site_name)s"
 msgid "Password reset on %(site_name)s"
 msgstr "שחזר סיסמה ב-%(site_name)s"
 
+#: codeguru/templates/registration/register.html:12
+msgid "If you already have an account,"
+msgstr "אם יש לך חשבון,"
+
+#: codeguru/templates/registration/register.html:12
+msgid "login"
+msgstr "התחבר"
+
+#: codeguru/templates/registration/register.html:12
+msgid "instead."
+msgstr "במקום"
+
 #: codeguru/templates/registration/registration_closed.html:5
 msgid "Registration is currently closed."
 msgstr "הרשמה כרגע סגורה"
@@ -213,6 +235,50 @@ msgstr "הרשמה כרגע סגורה"
 #: codeguru/templates/registration/registration_complete.html:5
 msgid "You are now registered. Activation email sent."
 msgstr "נרשמת בהצלחה. נשלח מייל להפעלה."
+
+#: codeguru/views.py:32
+msgid "Group already exists. try choosing another name."
+msgstr "שם הקבוצה תפוס. יש לבחור שם אחר."
+
+#: codeguru/views.py:64
+msgid "You must leave your group first."
+msgstr "עליך לעזוב את הקבוצה שלך תחילה."
+
+#: codeguru/views.py:68
+msgid "Invite expired."
+msgstr "תוקף ההזמנה פג."
+
+#: codeguru/views.py:75
+#, fuzzy
+#| msgid "Generate Invite Link"
+msgid "Invalid Invite link."
+msgstr "צור קישור הזמנה"
+
+#: codeguru/views.py:81
+msgid "You do not have a group."
+msgstr "אינך משוייך לאף קבוצה."
+
+#: codeguru/views.py:83
+msgid "Only an owner can create a group invite."
+msgstr "רק מייסד קבוצה יכול ליצור הזמנה."
+
+#: war/templates/challenges/challenge_base.html:6
+msgid "Description"
+msgstr "תיאור"
+
+#: war/templates/challenges/challenge_base.html:7
+msgid "Active"
+msgstr "פעיל"
+
+#: war/templates/challenges/challenge_base.html:7
+msgid "Inactive"
+msgstr "לא פעיל"
+
+#: war/templates/challenges/challenges.html:6
+#, fuzzy
+#| msgid "Challenges"
+msgid "Active Challenges"
+msgstr "אתגרים"
 
 #: war/templates/challenges/riddles/riddle_page.html:10
 msgid "Please upload .zip file"
@@ -222,6 +288,18 @@ msgstr "נא להעלות קובץ zip."
 #: war/templates/challenges/wars/war_page.html:26
 msgid "Upload"
 msgstr "שלח"
+
+#: war/views.py:29
+msgid "Riddle not found"
+msgstr "החידה לא נמצאה."
+
+#: war/views.py:70
+msgid "Upload failed. This challenge is inactive."
+msgstr "העלאה נכשלה. החידה לא פעילה."
+
+#: war/views.py:83
+msgid "War not found"
+msgstr "אתגר המלחמה לא נמצא."
 
 #~ msgid "Click here to join."
 #~ msgstr "לחץ כאן כדי להצטרף."

@@ -9,7 +9,7 @@ from .forms import SurvivorSubmissionForm, RiddleSubmissionForm
 from django.http import FileResponse, HttpResponseNotFound
 from os.path import join
 import re
-
+from django.utils.translation import gettext
 
 def challenges(request):
     wars = War.objects.all()
@@ -26,7 +26,7 @@ def riddle_page(request, id):
         group = request.user.profile.group
         riddle = Riddle.objects.get(id=id)
     except Riddle.DoesNotExist:
-        return error(request, 'Riddle not found')
+        return error(request, gettext('Riddle not found'))
     current_solution = None
     if RiddleSolution.objects.filter(group=group).exists():
         current_solution = RiddleSolution.objects.filter(group=group).first()
@@ -67,7 +67,7 @@ def war_page(request, id):
         
         if request.method == 'POST':
             if not war.active():
-                return error("Upload failed. This challenge is inactive.")
+                return error(request, gettext("Upload failed. This challenge is inactive."))
             form = SurvivorSubmissionForm(request.POST, request.FILES, war=war)
             if form.is_valid():
                 for surv in prev_surv:
@@ -80,4 +80,4 @@ def war_page(request, id):
             'form': form, 
             'prev_upload': prev_surv.first()})
     except War.DoesNotExist:
-        return error(request, 'War not found')
+        return error(request, gettext('War not found'))

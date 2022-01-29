@@ -6,9 +6,9 @@ from django.contrib.auth.decorators import login_required
 from django.utils.crypto import get_random_string
 from django.utils import translation
 from django.http import HttpResponse
+from django.utils.translation import gettext
 
-
-def error(request, msg, r404=False):
+def error(request, msg):
     return render(request, "error.html", {"error_message": msg})
 
 
@@ -29,7 +29,7 @@ def group(request):
         form = NewGroupForm(request.POST)
         if form.is_valid():
             if CgGroup.objects.filter(name=form.cleaned_data["name"]).exists():
-                return error(request, "Group already exists. try choosing another name.")
+                return error(request, gettext("Group already exists. try choosing another name."))
             new_group = CgGroup(
                 name=form.cleaned_data["name"], owner=request.user, center=form.cleaned_data["center"])
             new_group.save()
@@ -61,26 +61,26 @@ def register(request):
 @login_required
 def invite(request, code):
     if request.user.profile.group:
-        return error(request, "You must leave your group first.")
+        return error(request, gettext("You must leave your group first."))
     try:
         invite = Invite.objects.get(code=code)
         if invite.expired():
-            return error(request, "Inviite expired.")
+            return error(request, gettext("Invite expired."))
         if request.user.profile.group != invite.group:
             leave_group(request)
         request.user.profile.group = invite.group
         request.user.profile.save()
         return redirect("/group/")
     except Invite.DoesNotExist:
-        return error(request, "Invalid Invite link.")
+        return error(request, gettext("Invalid Invite link."))
 
 
 @login_required
 def create_invite(request):
     if not request.user.profile.group:
-        return error(request, "You do not have a group.")
+        return error(request, gettext("You do not have a group."))
     if request.user != request.user.profile.group.owner:
-        return error(request, "Only an owner can create a group invite.")
+        return error(request, gettext("Only an owner can create a group invite."))
 
     try:
         invite = Invite.objects.get(group=request.user.profile.group)

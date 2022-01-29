@@ -1,6 +1,9 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
-<meta http-equiv="refresh" content="3;url={% url 'index' %}" />
-logged out.
+
+<meta http-equiv="refresh" content="2;url={% url 'index' %}" />
+<h1>{% trans "Logged out." %}</h1>
+
 {% endblock %}
