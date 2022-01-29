@@ -41,6 +41,7 @@ class Invite(models.Model):
                             default=get_random_string(64))
     created = models.DateTimeField(auto_now_add=True)
 
+    @property
     def expired(self):
         return timezone.now() > self.created + timedelta(hours=INVITE_TIMEOUT)
 

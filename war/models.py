@@ -22,6 +22,7 @@ class Challenge(models.Model):
     class Meta:
         abstract = True
 
+    @property
     def active(self):
         return self.end_date > timezone.now() > self.start_date
 
@@ -48,7 +49,7 @@ class War(Challenge):
     amount_of_survivors = models.PositiveIntegerField(
         default=2, validators=[MinValueValidator(1)])
     zombie_mode = models.BooleanField(default=False)
-
+    
 
 def bin_max(value):
     filesize = value.size

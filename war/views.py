@@ -63,16 +63,21 @@ def war_page(request, id):
         war = War.objects.get(id=id)
         form = SurvivorSubmissionForm(war=war)
         group = request.user.profile.group
-
+        prev_surv = Survivor.objects.filter(group=group, war=war)
+        
         if request.method == 'POST':
+            if not war.active():
+                return error("Upload failed. This challenge is inactive.")
             form = SurvivorSubmissionForm(request.POST, request.FILES, war=war)
             if form.is_valid():
-                for surv in Survivor.objects.filter(group=group, war=war):
+                for surv in prev_surv:
                     surv.delete()
                 for i in range(1, war.amount_of_survivors + 1):
                     Survivor(
                         group=group, war=war, asm_file=form.files[f'asm_{i}'], bin_file=form.files[f'bin_{i}'], warrior_file_idx=i).save()
 
-        return render(request, 'challenges/wars/war_page.html', {'challenge': war, 'form': form, 'prev_upload': Survivor.objects.filter(group=group, war=war).first()})
+        return render(request, 'challenges/wars/war_page.html', {'challenge': war, 
+            'form': form, 
+            'prev_upload': prev_surv.first()})
     except War.DoesNotExist:
         return error(request, 'War not found')

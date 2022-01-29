@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-28 16:10+0200\n"
+"POT-Creation-Date: 2022-01-29 13:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -214,8 +214,12 @@ msgstr "הרשמה כרגע סגורה"
 msgid "You are now registered. Activation email sent."
 msgstr "נרשמת בהצלחה. נשלח מייל להפעלה."
 
+#: war/templates/challenges/riddles/riddle_page.html:10
+msgid "Please upload .zip file"
+msgstr "נא להעלות קובץ zip."
+
 #: war/templates/challenges/riddles/riddle_page.html:15
-#: war/templates/challenges/wars/war_page.html:24
+#: war/templates/challenges/wars/war_page.html:26
 msgid "Upload"
 msgstr "שלח"
 
