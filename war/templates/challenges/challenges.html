@@ -3,16 +3,16 @@
 {% block content %}
 
 
-<h1>Active Challenges:</h1>
+<h1>{% trans "Active Challenges" %}:</h1>
 <ul>
 {% for challenge in challenges %}
     <li>
         {% if challenge.get_my_model_name == "war" %}
-        <a href="{% url 'war_page' challenge.id %}">{{ challenge.title }}</a>
+        <a href="{% url 'war_page' challenge.id %}">{{ challenge.title }}</a> ( {{ challenge.start_date }} -> {{ challenge.end_date }} )
         {% endif %}
 
         {% if challenge.get_my_model_name == "riddle" %}
-        <a href="{% url 'riddle_page' challenge.id %}">{{ challenge.title }}</a>
+        <a href="{% url 'riddle_page' challenge.id %}">{{ challenge.title }}</a> ( {{ challenge.start_date }} -> {{ challenge.end_date }} )
         {% endif %}
     </li>
 {% endfor %}

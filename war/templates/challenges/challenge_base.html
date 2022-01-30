@@ -3,8 +3,8 @@
 {% block content %}
 
 <b>{{ challenge.title }}</b> ( {{ challenge.start_date }} -> {{ challenge.end_date }} )<br>
-description: {{ challenge.description }}<br>
-active: {{ challenge.active}}
+<h2>{% trans "Description" %}:</h2><br>{{ challenge.description }}<br>
+{% if challenge.active %}{% trans "Active" %}{% else %}{% trans "Inactive" }{% endif %}
 <br>
 
 {% if user.profile.group %}

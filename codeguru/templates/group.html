@@ -49,7 +49,7 @@
 {% trans "Create Group:" %}<br>
 <form method="post" action=".">
     {% csrf_token %} 
-    <br><b>Note: Spaces are not allowed in the group name.</b>
+    <strong>{% trans "Note: Spaces are not allowed in the group name." %}</strong>
     {{ form.as_p }}
   
     <input type="submit" value="{% trans 'New Group' %}" />
