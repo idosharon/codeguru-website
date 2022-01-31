@@ -1,5 +1,4 @@
 from django.shortcuts import redirect, render
-from numpy import right_shift
 from .models import RiddleSolution, War, Riddle, Survivor, warrior_storage
 from itertools import chain
 from codeguru.views import error

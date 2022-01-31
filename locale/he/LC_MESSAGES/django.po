@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-29 18:10+0200\n"
+"POT-Creation-Date: 2022-01-30 23:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -121,8 +121,8 @@ msgid "Codeguru Extreme"
 msgstr "קודגורו אקסטרים"
 
 #: codeguru/templates/index.html:7
-msgid "Groups"
-msgstr "קבוצות"
+msgid "Welcome to Codeguru Extreme! Here are the registered groups:"
+msgstr "ברוכים הבאים לקודגורו אקסטרים! להלן הקבוצות הרשומות:"
 
 #: codeguru/templates/profile.html:7
 msgid "Your score is"
@@ -236,29 +236,29 @@ msgstr "הרשמה כרגע סגורה"
 msgid "You are now registered. Activation email sent."
 msgstr "נרשמת בהצלחה. נשלח מייל להפעלה."
 
-#: codeguru/views.py:32
+#: codeguru/views.py:33
 msgid "Group already exists. try choosing another name."
 msgstr "שם הקבוצה תפוס. יש לבחור שם אחר."
 
-#: codeguru/views.py:64
+#: codeguru/views.py:65
 msgid "You must leave your group first."
 msgstr "עליך לעזוב את הקבוצה שלך תחילה."
 
-#: codeguru/views.py:68
+#: codeguru/views.py:69
 msgid "Invite expired."
 msgstr "תוקף ההזמנה פג."
 
-#: codeguru/views.py:75
+#: codeguru/views.py:76
 #, fuzzy
 #| msgid "Generate Invite Link"
 msgid "Invalid Invite link."
 msgstr "צור קישור הזמנה"
 
-#: codeguru/views.py:81
+#: codeguru/views.py:82
 msgid "You do not have a group."
 msgstr "אינך משוייך לאף קבוצה."
 
-#: codeguru/views.py:83
+#: codeguru/views.py:84
 msgid "Only an owner can create a group invite."
 msgstr "רק מייסד קבוצה יכול ליצור הזמנה."
 
@@ -289,17 +289,20 @@ msgstr "נא להעלות קובץ zip."
 msgid "Upload"
 msgstr "שלח"
 
-#: war/views.py:29
+#: war/views.py:28
 msgid "Riddle not found"
 msgstr "החידה לא נמצאה."
 
-#: war/views.py:70
+#: war/views.py:69
 msgid "Upload failed. This challenge is inactive."
 msgstr "העלאה נכשלה. החידה לא פעילה."
 
-#: war/views.py:83
+#: war/views.py:82
 msgid "War not found"
 msgstr "אתגר המלחמה לא נמצא."
+
+#~ msgid "Groups"
+#~ msgstr "קבוצות"
 
 #~ msgid "Click here to join."
 #~ msgstr "לחץ כאן כדי להצטרף."

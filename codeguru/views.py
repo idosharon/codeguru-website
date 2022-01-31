@@ -7,6 +7,7 @@ from django.utils.crypto import get_random_string
 from django.utils import translation
 from django.http import HttpResponse
 from django.utils.translation import gettext
+from django.conf import settings
 
 def error(request, msg):
     return render(request, "error.html", {"error_message": msg})
@@ -116,8 +117,9 @@ def set_lang(request):
         if language not in ("en", "he"):
             return HttpResponse("Bad request", status=400)
         translation.activate(language)
-        request.session[translation.LANGUAGE_SESSION_KEY] = language
-        return redirect(request.POST["next"])
+        response = redirect(request.POST["next"])
+        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language)
+        return response
     return HttpResponse("Method Not Allowed", status=405)
 
 
