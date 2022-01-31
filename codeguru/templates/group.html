@@ -20,15 +20,8 @@
     {% if user == user.profile.group.owner %}
         {% if user.profile.group.invite and not is_expired %}
         {% trans "This invite will be valid for the next 48 hours." %}<br>
-        {% trans "Use this link to join the group:" %}
-        <button type="button" onClick='copy_link()' >{% trans "Copy Link" %}</button>
-        
-        <script>
-            function copy_link() {
-                text = "{% url 'invite' user.profile.group.invite.code %}";
-                navigator.clipboard.writeText(text);
-            }
-        </script>
+	{% trans "Use this link to join the group:" %}<br>
+	<a href="http://{{ request.get_host }}{% url 'invite' user.profile.group.invite.code %}">http://{{ request.get_host }}{% url 'invite' user.profile.group.invite.code %}</a>
         
         {% else %}
         <p>{% trans "There is no invite code for the group yet, you can create one here:" %}</p>
@@ -49,7 +42,9 @@
 {% trans "Create Group:" %}<br>
 <form method="post" action=".">
     {% csrf_token %} 
-    <strong>{% trans "Note: Spaces are not allowed in the group name." %}</strong>
+    <strong>{% trans "Note: Spaces are not allowed in the group name." %}</strong><br>
+    <strong>{% trans "Note: Center name should be presented using 3 capital letters in English." %}</strong>
+
     {{ form.as_p }}
   
     <input type="submit" value="{% trans 'New Group' %}" />

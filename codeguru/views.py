@@ -39,7 +39,7 @@ def group(request):
             return redirect("group")
     link_expired = False
     try:
-        link_expired = request.user.profile.group.invite.expired()
+        link_expired = request.user.profile.group.invite.expired
     except:
         link_expired = False
 
@@ -65,7 +65,7 @@ def invite(request, code):
         return error(request, gettext("You must leave your group first."))
     try:
         invite = Invite.objects.get(code=code)
-        if invite.expired():
+        if invite.expired:
             return error(request, gettext("Invite expired."))
         if request.user.profile.group != invite.group:
             leave_group(request)

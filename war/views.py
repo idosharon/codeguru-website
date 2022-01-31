@@ -65,7 +65,7 @@ def war_page(request, id):
         prev_surv = Survivor.objects.filter(group=group, war=war)
         
         if request.method == 'POST':
-            if not war.active():
+            if not war.active:
                 return error(request, gettext("Upload failed. This challenge is inactive."))
             form = SurvivorSubmissionForm(request.POST, request.FILES, war=war)
             if form.is_valid():

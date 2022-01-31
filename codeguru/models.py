@@ -6,9 +6,12 @@ from django.utils.crypto import get_random_string
 from datetime import datetime, timedelta
 from django.utils import timezone
 from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 
-# def validate_length(value):
-#     return len(value) == 3
+def validate_center(value):
+    if len(value) == 3 and value.isalpha() and value.isascii():
+        return value
+    raise ValidationError("Center should be represented with 3 letters in english.")
 
 INVITE_TIMEOUT = 48
 CENTER_CHOICES = [
@@ -25,11 +28,11 @@ def group_name_validator(name):
 
 class CgGroup(models.Model):
     name = models.CharField(max_length=30, unique=True,
-                            validators=[group_name_validator])
+                            validators=[group_name_validator], verbose_name=_("Name"))
     # acronym = models.CharField(max_length=3, validators=[validate_length], unique=True)
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
     center = models.CharField(
-        max_length=3, choices=CENTER_CHOICES, default="IND")
+        max_length=3, validators=[validate_center], default="IND", verbose_name=_("Center"))
 
     def __str__(self):
         return self.name
@@ -50,8 +53,6 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     group = models.ForeignKey(CgGroup, null=True, on_delete=models.SET_NULL)
     score = models.IntegerField(default=0)
-    # picture = models.ImageField(
-    #     upload_to='profile_pics', default='profile_pics/default.jpg')
 
     def __str__(self):
         return f"Profile of {self.user.username}"

@@ -1,14 +1,21 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
 
-<b>{{ challenge.title }}</b> ( {{ challenge.start_date }} -> {{ challenge.end_date }} )<br>
-<h2>{% trans "Description" %}:</h2><br>{{ challenge.description }}<br>
-{% if challenge.active %}{% trans "Active" %}{% else %}{% trans "Inactive" }{% endif %}
+<b>{{ challenge.title }}</b> ( {{ challenge.start_date }} -> {{ challenge.end_date }} )
+<h2>{% trans "Description" %}:</h2>{{ challenge.description }}<br>
+{% trans "Status" %}: <strong>{% if challenge.active %}{% trans "Active" %}{% else %}{% trans "Inactive" %}{% endif %}</strong>
 <br>
 
-{% if user.profile.group %}
-    {% block 'challenge_fields' %}{% endblock %}
+{% if challenge.active %}
+
+    {% if user.profile.group %}
+        {% block 'challenge_fields' %}{% endblock %}
+    {% endif %}
+
+{% else %}
+    {% trans "Challenge ended!" %}
 {% endif %}
 
 {% endblock %}
