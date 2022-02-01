@@ -36,6 +36,10 @@ class CgGroup(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def save(self, *args, **kwargs):
+        self.center = self.center.upper()
+        return super(CgGroup, self).save(*args, **kwargs)
 
 
 class Invite(models.Model):

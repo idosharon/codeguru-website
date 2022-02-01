@@ -36,7 +36,7 @@ def riddle_page(request, id):
                 current_solution.delete()
             RiddleSolution(
                 riddle_solution=request.FILES["riddle_solution"], riddle=riddle, group=group).save()
-    return render(request, 'challenges/riddles/riddle_page.html', {'challenge': riddle, 'form': form, 'current_solution': current_solution})
+    return render(request, 'challenges/riddles/riddle_page.html', {'challenge': riddle, 'form': form, 'current_solution': RiddleSolution.objects.filter(group=group).first()})
 
 
 @login_required

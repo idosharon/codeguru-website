@@ -43,7 +43,7 @@
 <form method="post" action=".">
     {% csrf_token %} 
     <strong>{% trans "Note: Spaces are not allowed in the group name." %}</strong><br>
-    <strong>{% trans "Note: Center name should be presented using 3 capital letters in English." %}</strong>
+    <strong>{% trans "Note: Center name should be presented using 3 CAPITAL letters in English." %}</strong>
 
     {{ form.as_p }}
   

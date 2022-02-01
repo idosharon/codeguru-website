@@ -6,8 +6,13 @@
 {% comment %} {{ current_solution }} {% endcomment %}
 
 {% if user.profile.group.owner == user and challenge.active %}
-<strong>{% trans "Please upload .zip file" %}</strong>
-<form method="post" action="{{ request.path }}" enctype="multipart/form-data">
+<strong>{% trans "Please upload .zip file" %}</strong><br>
+
+{% if current_solution %}
+{% trans "Last update to survivors was" %} {{ current_solution.upload_date|timesince }} {% trans "ago" %}
+{% endif %}
+
+<form method="post" action="{{ challenge.id }}" enctype="multipart/form-data">
     {% csrf_token %} 
     {{ form.as_p }}
 
