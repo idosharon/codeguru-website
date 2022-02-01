@@ -21,6 +21,9 @@ class NewUserForm(UserCreationForm):
 
 
 class NewGroupForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(NewGroupForm, self).__init__(*args, **kwargs)
+        self.fields['center'].widget.attrs['style'] = "width:50px"
 
     class Meta:
         model = CgGroup
