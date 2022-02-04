@@ -38,7 +38,7 @@ def war_directory_path(instance, bin):
         return join("wars", "zombies", str(instance.war.id), uuid4().hex)
     idx = instance.warrior_file_idx
     name = f"bin_{idx}" if bin else f"asm_{idx}"
-    return join("wars", "submissions", str(instance.war.id), str(instance.group.id), name)
+    return join("wars", "submissions", str(instance.war.id), instance.group.center + "_" + instance.group.name, name)
 
 
 def riddle_directory_path(instance, filename):

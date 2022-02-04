@@ -6,9 +6,13 @@ __pycache__
 db.sqlite3
 data/**
 
+# Migrations
+*/migrations/**
+
 # Backup files # 
 *.bak 
 backup/**
+
 
 # If you are using PyCharm # 
 # User-specific stuff
