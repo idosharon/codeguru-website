@@ -139,7 +139,7 @@ msgstr "אם אינך צעיר אולי תרצה לבקר "
 
 #: codeguru/templates/index.html:7
 msgid "here"
-msgstr "פה"
+msgstr "כאן"
 
 #: codeguru/templates/index.html:8
 msgid "Welcome to Codeguru Extreme Young! Here are the registered groups:"
