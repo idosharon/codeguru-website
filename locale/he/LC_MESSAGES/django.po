@@ -32,8 +32,6 @@ msgid "Center"
 msgstr "מרכז"
 
 #: codeguru/templates/base.html:39
-#, fuzzy
-#| msgid "CodeGuru Extreme"
 msgid "CodeGuru Extreme (Young)"
 msgstr "קודגורו אקסטרים (לצעירים)"
 
@@ -123,9 +121,6 @@ msgid "Note: Spaces are not allowed in the group name."
 msgstr "שים לב: אין להשתמש ברווחים בשם הקבוצה."
 
 #: codeguru/templates/group.html:46
-#, fuzzy
-#| msgid ""
-#| "Note: Center name should be presented using 3 capital letters in English."
 msgid ""
 "Note: Center name should be presented using 3 CAPITAL letters in English."
 msgstr "שים לב: שם המרכז חייב להיות מורכב מ-3 אותיות גדולות באנגלית."
@@ -135,14 +130,10 @@ msgid "New Group"
 msgstr "קבוצה חדשה"
 
 #: codeguru/templates/index.html:5
-#, fuzzy
-#| msgid "Codeguru Extreme"
 msgid "Codeguru Extreme (Young)"
 msgstr "קודגורו אקסטרים (לצעירים)"
 
 #: codeguru/templates/index.html:7
-#, fuzzy
-#| msgid "If you are not young you might want to go "
 msgid "If you are not young you might want to go"
 msgstr "אם אינך צעיר אולי תרצה לבקר "
 
@@ -151,8 +142,6 @@ msgid "here"
 msgstr "פה"
 
 #: codeguru/templates/index.html:8
-#, fuzzy
-#| msgid "Welcome to Codeguru Extreme! Here are the registered groups:"
 msgid "Welcome to Codeguru Extreme Young! Here are the registered groups:"
 msgstr "ברוכים הבאים לקודגורו אקסטרים לצעירים! להלן הקבוצות הרשומות:"
 
@@ -273,8 +262,6 @@ msgid "Group already exists. try choosing another name."
 msgstr "שם הקבוצה תפוס. יש לבחור שם אחר."
 
 #: codeguru/views.py:59
-#, fuzzy
-#| msgid "Email address"
 msgid "Email already exists."
 msgstr "כתובת מייל"
 
@@ -287,8 +274,6 @@ msgid "Invite expired."
 msgstr "תוקף ההזמנה פג."
 
 #: codeguru/views.py:80
-#, fuzzy
-#| msgid "Generate Invite Link"
 msgid "Invalid Invite link."
 msgstr "צור קישור הזמנה"
 
@@ -325,8 +310,6 @@ msgid "Inactive"
 msgstr "לא פעיל"
 
 #: war/templates/challenges/challenge_base.html:18
-#, fuzzy
-#| msgid "Challenges"
 msgid "Challenge ended!"
 msgstr "אתגרים"
 
