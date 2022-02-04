@@ -27,9 +27,9 @@ with open('/etc/secret_key.txt') as f:
     SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['submit.codeguru.co.il','submit.codeguru.co.il']
+ALLOWED_HOSTS = ['young.codeguru.co.il','young.codeguru.co.il']
 USE_I18N = True
 TIME_ZONE = "Asia/Jerusalem"
 
