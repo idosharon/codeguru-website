@@ -13,7 +13,7 @@ from django.utils.translation import gettext
 def challenges(request):
     wars = War.objects.all()
     riddles = Riddle.objects.all()
-    challenges = sorted(chain(wars, riddles), key=lambda x: x.start_date)
+    challenges = sorted(chain(wars, riddles), key=lambda x: x.end_date)
 
     return render(request, 'challenges/challenges.html', {'challenges': challenges})
 
