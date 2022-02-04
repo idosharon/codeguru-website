@@ -35,7 +35,7 @@ msgstr "מרכז"
 #, fuzzy
 #| msgid "CodeGuru Extreme"
 msgid "CodeGuru Extreme (Young)"
-msgstr "קודגורו אקסטרים (צעירים)"
+msgstr "קודגורו אקסטרים (לצעירים)"
 
 #: codeguru/templates/base.html:40
 msgid "Home"
@@ -135,10 +135,14 @@ msgid "New Group"
 msgstr "קבוצה חדשה"
 
 #: codeguru/templates/index.html:5
+#, fuzzy
+#| msgid "Codeguru Extreme"
 msgid "Codeguru Extreme (Young)"
-msgstr "קודגורו אקסטרים (צעירים)"
+msgstr "קודגורו אקסטרים (לצעירים)"
 
 #: codeguru/templates/index.html:7
+#, fuzzy
+#| msgid "If you are not young you might want to go "
 msgid "If you are not young you might want to go"
 msgstr "אם אינך צעיר אולי תרצה לבקר "
 
@@ -147,6 +151,8 @@ msgid "here"
 msgstr "פה"
 
 #: codeguru/templates/index.html:8
+#, fuzzy
+#| msgid "Welcome to Codeguru Extreme! Here are the registered groups:"
 msgid "Welcome to Codeguru Extreme Young! Here are the registered groups:"
 msgstr "ברוכים הבאים לקודגורו אקסטרים לצעירים! להלן הקבוצות הרשומות:"
 
