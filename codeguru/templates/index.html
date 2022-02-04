@@ -2,9 +2,10 @@
 
 {% block content %}
 {% load i18n %}
-<h1>{% trans "Codeguru Extreme" %}!</h1>
+<h1>{% trans "Codeguru Extreme (Young)" %}!</h1>
 <br>
-{% trans "Welcome to Codeguru Extreme! Here are the registered groups:" %}
+{% trans "If you are not young you might want to go" %} <a href="http://submit.codeguru.co.il">{% trans "here" %}</a><br>
+{% trans "Welcome to Codeguru Extreme Young! Here are the registered groups:" %}
 <ul>
 {% for group in groups %}
     <li>{{ group.name }}</li>
