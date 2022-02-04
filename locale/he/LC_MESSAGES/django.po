@@ -135,7 +135,7 @@ msgstr "קודגורו אקסטרים (לצעירים)"
 
 #: codeguru/templates/index.html:7
 msgid "If you are not young you might want to go"
-msgstr "אם אינך צעיר אולי תרצה לבקר "
+msgstr "אם אינכם צעירים אולי תרצו לבקר "
 
 #: codeguru/templates/index.html:7
 msgid "here"
