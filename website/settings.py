@@ -17,19 +17,25 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+IS_PRODUCTION = False
 
 LANGUAGE_CODE = 'en'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-with open('/etc/secret_key.txt') as f:
-    SECRET_KEY = f.read().strip()
+if IS_PRODUCTION:
+    with open('/etc/secret_key.txt') as f:
+        SECRET_KEY = f.read().strip()
+else:
+    SECRET_KEY = "secret"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = not IS_PRODUCTION
 
-ALLOWED_HOSTS = ['submit.codeguru.co.il','submit.codeguru.co.il']
+ALLOWED_HOSTS = []
+if IS_PRODUCTION:
+    ALLOWED_HOSTS = ['submit.codeguru.co.il','submit.codeguru.co.il']
 USE_I18N = True
 TIME_ZONE = "Asia/Jerusalem"
 
@@ -45,7 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_cleanup',
-    'dbbackup'
+    'dbbackup',
 ]
 
 CSRF_COOKIE_SECURE = False
@@ -139,8 +145,7 @@ PRIVATE_STORAGE_ROOT = os.path.join(BASE_DIR, "data")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-cg_user, cg_paswd = os.getenv(
-    "cg_mail_user", None), os.getenv("cg_mail_paswd", None)
+cg_user, cg_paswd = os.getenv("cg_mail_user", None), os.getenv("cg_mail_paswd", None)
 
 if cg_user and cg_paswd:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

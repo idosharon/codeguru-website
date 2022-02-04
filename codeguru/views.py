@@ -8,6 +8,7 @@ from django.utils import translation
 from django.http import HttpResponse
 from django.utils.translation import gettext
 from django.conf import settings
+from django.core.exceptions import ValidationError
 
 def error(request, msg):
     return render(request, "error.html", {"error_message": msg})
@@ -52,7 +53,10 @@ def register(request):
     if request.method == "POST":
         form = NewUserForm(request.POST, request.FILES)
         if form.is_valid():
-            user = form.save()
+            try:
+                user = form.save()
+            except ValidationError:
+                return error(request, gettext("Email already exists."))
             login(request, user)
             return redirect("/")
     form = NewUserForm()

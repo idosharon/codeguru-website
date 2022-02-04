@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import CgGroup, CENTER_CHOICES
 from django.utils.translation import gettext_lazy as _
+from django.core.exceptions import ValidationError
 
 class NewUserForm(UserCreationForm):
     email = forms.EmailField(required=True, label=_("Email"))
@@ -14,6 +15,9 @@ class NewUserForm(UserCreationForm):
     def save(self, commit=True):
         user = super(NewUserForm, self).save(commit=False)
         user.email = self.cleaned_data['email']
+
+        if User.objects.filter(email=user.email).exists():
+            raise ValidationError("Email already exists")
 
         if commit:
             user.save()
