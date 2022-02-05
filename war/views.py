@@ -46,8 +46,7 @@ def download(request, id, filename):
     try:
         group = request.user.profile.group
         war = War.objects.get(id=id)
-        path = join("wars", "submissions", str(
-            war.id), str(group.id), filename)
+        path = join("wars", "submissions", str(war.id), group.center + "_" + group.name, filename)
         response = FileResponse(warrior_storage.open(
             path, 'rb'), content_type='application/force-download')
         response['Content-Disposition'] = f'attachment; filename="{filename}"'
