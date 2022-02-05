@@ -17,7 +17,8 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-IS_PRODUCTION = False
+# To make sure we don't accidentally disable production on production
+IS_PRODUCTION = os.path.exists('/etc/secret_key.txt')
 
 LANGUAGE_CODE = 'en'
 # Quick-start development settings - unsuitable for production
