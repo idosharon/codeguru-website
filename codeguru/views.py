@@ -89,8 +89,6 @@ def create_invite(request):
 
     try:
         invite = Invite.objects.get(group=request.user.profile.group)
-        invite.code = get_random_string(64)
-        invite.save()
     except Invite.DoesNotExist:
         invite = Invite(group=request.user.profile.group,
                         code=get_random_string(64))
