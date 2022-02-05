@@ -50,7 +50,7 @@ class Invite(models.Model):
 
     @property
     def expired(self):
-        return timezone.now() > self.created + timedelta(hours=INVITE_TIMEOUT)
+        return False
 
 
 class Profile(models.Model):
