@@ -18,8 +18,7 @@
     </div>
     
     {% if user == user.profile.group.owner %}
-        {% if user.profile.group.invite and not is_expired %}
-        {% trans "This invite will be valid for the next 48 hours." %}<br>
+        {% if user.profile.group.invite and not is_expired %}<br>
 	{% trans "Use this link to join the group:" %}<br>
 	<a href="http://{{ request.get_host }}{% url 'invite' user.profile.group.invite.code %}">http://{{ request.get_host }}{% url 'invite' user.profile.group.invite.code %}</a>
         
