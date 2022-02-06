@@ -89,49 +89,56 @@ msgid "Owner"
 msgstr "מייסד"
 
 #: codeguru/templates/group.html:22
-msgid "This invite will be valid for the next 48 hours."
-msgstr "ההזמנה הזו תהיה תקפה ל48 שעות הבאות."
-
-#: codeguru/templates/group.html:23
 msgid "Use this link to join the group:"
 msgstr "השתמש בלינק הזה כדי להיכנס לקבוצה:"
 
-#: codeguru/templates/group.html:27
+#: codeguru/templates/group.html:26
 msgid "There is no invite code for the group yet, you can create one here:"
 msgstr "אין לינק הזמנה לקבוצה עדיין, ניתן ליצור אחד כאן:"
 
-#: codeguru/templates/group.html:31
+#: codeguru/templates/group.html:30
 msgid "Generate Invite Link"
 msgstr "צור קישור הזמנה"
 
-#: codeguru/templates/group.html:37
+#: codeguru/templates/group.html:36
 msgid "Leave Group"
 msgstr "צא מהקבוצה"
 
-#: codeguru/templates/group.html:41
+#: codeguru/templates/group.html:40
 msgid "You are not associated with any group, try to create a new one:"
 msgstr "אינך משוייך לשום קבוצה, אתה יכול ליצור אחת חדשה כאן:"
 
-#: codeguru/templates/group.html:42
+#: codeguru/templates/group.html:44
 msgid "Create Group:"
 msgstr "צור קבוצה:"
 
-#: codeguru/templates/group.html:45
+#: codeguru/templates/group.html:47
 msgid "Note: Spaces are not allowed in the group name."
 msgstr "שים לב: אין להשתמש ברווחים בשם הקבוצה."
 
-#: codeguru/templates/group.html:46
+#: codeguru/templates/group.html:48
+#, fuzzy
+#| msgid ""
+#| "Note: Center name should be presented using 3 capital letters in English."
 msgid ""
 "Note: Center name should be presented using 3 CAPITAL letters in English."
 msgstr "שים לב: שם המרכז חייב להיות מורכב מ-3 אותיות גדולות באנגלית."
 
-#: codeguru/templates/group.html:50
+#: codeguru/templates/group.html:52
 msgid "New Group"
 msgstr "קבוצה חדשה"
+
+#: codeguru/templates/group.html:56
+msgid "Sorry, the registertion has ended."
+msgstr "ההרשמה נסגרה."
 
 #: codeguru/templates/index.html:5
 msgid "Codeguru Extreme (Young)"
 msgstr "קודגורו אקסטרים (לצעירים)"
+
+#: codeguru/templates/index.html:6
+msgid "Statistics:"
+msgstr "סטטיסטיקה:"
 
 #: codeguru/templates/index.html:7
 msgid "If you are not young you might want to go"
@@ -144,6 +151,16 @@ msgstr "כאן"
 #: codeguru/templates/index.html:8
 msgid "Welcome to Codeguru Extreme Young! Here are the registered groups:"
 msgstr "ברוכים הבאים לקודגורו אקסטרים לצעירים! להלן הקבוצות הרשומות:"
+msgid "Number of Groups: "
+msgstr "מספר הקבוצות: "
+
+#: codeguru/templates/index.html:8
+msgid "Number of Users: "
+msgstr "מספר המשתמשים: "
+
+#: codeguru/templates/index.html:9
+msgid "Here are the registered groups:"
+msgstr "להלן הקבוצות הרשומות:"
 
 #: codeguru/templates/profile.html:7
 msgid "Your score is"
@@ -348,13 +365,16 @@ msgstr "הורדה"
 msgid "Riddle not found"
 msgstr "החידה לא נמצאה."
 
-#: war/views.py:69
+#: war/views.py:68
 msgid "Upload failed. This challenge is inactive."
 msgstr "העלאה נכשלה. החידה לא פעילה."
 
-#: war/views.py:82
+#: war/views.py:81
 msgid "War not found"
 msgstr "אתגר המלחמה לא נמצא."
+
+#~ msgid "This invite will be valid for the next 48 hours."
+#~ msgstr "ההזמנה הזו תהיה תקפה ל48 שעות הבאות."
 
 #~ msgid "Messages"
 #~ msgstr "הודעות"
