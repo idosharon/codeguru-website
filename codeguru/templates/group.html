@@ -38,6 +38,9 @@
 </div>
 {% else %}
 {% trans "You are not associated with any group, try to create a new one:" %}<br>
+
+{% if CAN_REGISTER %}
+
 {% trans "Create Group:" %}<br>
 <form method="post" action=".">
     {% csrf_token %} 
@@ -48,6 +51,11 @@
   
     <input type="submit" value="{% trans 'New Group' %}" />
 </form>
+
+{% else %}
+{% trans "Sorry, the registertion has ended." %}
+{% endif %}
+
 {% endif %}
 
 

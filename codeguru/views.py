@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from .forms import NewUserForm, NewGroupForm
-from .models import Profile, Invite, CgGroup
+from .models import Profile, Invite, CgGroup, User
 from django.contrib.auth.decorators import login_required
 from django.utils.crypto import get_random_string
 from django.utils import translation
@@ -9,6 +9,7 @@ from django.http import HttpResponse
 from django.utils.translation import gettext
 from django.conf import settings
 from django.core.exceptions import ValidationError
+from website.settings import CAN_REGISTER
 
 def error(request, msg):
     return render(request, "error.html", {"error_message": msg})
@@ -44,7 +45,7 @@ def group(request):
     except:
         link_expired = False
 
-    return render(request, 'group.html', {"form": NewGroupForm(), "is_expired": link_expired, "members": Profile.objects.all().filter(group=request.user.profile.group)})
+    return render(request, 'group.html', {'CAN_REGISTER':CAN_REGISTER,"form": NewGroupForm(), "is_expired": link_expired, "members": Profile.objects.all().filter(group=request.user.profile.group)})
 
 
 def register(request):
@@ -126,4 +127,4 @@ def set_lang(request):
 
 
 def index(request):
-    return render(request, 'index.html', {"groups": CgGroup.objects.all()})
+    return render(request, 'index.html', {"groups": CgGroup.objects.all(), "users": User.objects.all()})

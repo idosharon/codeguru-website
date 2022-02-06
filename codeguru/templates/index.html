@@ -3,8 +3,10 @@
 {% block content %}
 {% load i18n %}
 <h1>{% trans "Codeguru Extreme" %}!</h1>
-<br>
-{% trans "Welcome to Codeguru Extreme! Here are the registered groups:" %}
+<h2>{% trans "Statistics:" %}</h2>
+{% trans "Number of Groups: " %}{{ groups.count }}<br>
+{% trans "Number of Users: " %}{{ users.count }}
+<h2>{% trans "Here are the registered groups:" %}</h2>
 <ul>
 {% for group in groups %}
     <li>{{ group.center }}&nbsp;{{ group.name }}</li>
