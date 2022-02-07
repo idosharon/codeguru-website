@@ -1,36 +1,60 @@
 import argparse
 from os import listdir
 import os
-from re import sub
 import subprocess
-from typing import List
+from typing import List, Tuple, Dict
 import logging
-logging.basicConfig(level=logging.DEBUG)
 
+
+logging.basicConfig(level=logging.DEBUG)
 
 logger = logging.getLogger(__name__)
 
 ENGINE_JAR = 'corewars8086-4.0.0-cli-support.jar'
 AUTO_COREWARS_CLASS = 'il.co.codeguru.corewars8086.AutoCoreWars'
 
-def parse_game_results(game_results: str):
-    team_to_total_score = dict()
-    for line in game_results.decode('ascii').split('\n'):
-        # each result line starts like:
-        #   ksdr,151.16666,ksdr1,151.16666,ksdr2,0.0
-        if line == '':
-            continue
-        logger.debug("Parsing: '{}'".format(line))
-        team_info_results = line.split(',')
-        if len(team_info_results) == 4:
-            teamname, total_score, survivor1, survivor1_score = line.split(',')
-        elif len(team_info_results) == 6:
-            teamname, total_score, survivor1, survivor1_score, survivor2, survivor2_score = line.split(
-                ',')
-        else:
-            raise ValueError(f"Can't parse result '{line}'")
-        team_to_total_score[teamname] = float(total_score)
-    return team_to_total_score
+
+def parse_game_results(game_results: str) -> Dict[str, float]:
+    """
+    Extracts the relevant information out of the engine's output.
+
+    @param game_results: The game results as the engine supplies them.
+    @return: A dictionary containing the teams name and the result it scored.
+    """
+    result_lines = game_results.decode('ascii').split('\n')
+    existing_result_lines = filter(lambda line: line != '', result_lines)
+    team_to_total_score_tuples = map(log_and_parse_result_line, existing_result_lines)
+    return {game_result[0]: game_result[1] for game_result in team_to_total_score_tuples}
+
+
+def log_and_parse_result_line(result_line: str) -> Tuple[str, float]:
+    """
+    Parses the results of a single game while logging it to the console.
+
+    @param result_line: The single line result representing the outcome of a game
+    @return: The name of the team and the score as a tuple
+    """
+    logger.debug("Parsing: '{}'".format(result_line))
+    return parse_result_line(result_line)
+
+
+def parse_result_line(result_line: str) -> Tuple[str, float]:
+    """
+    Parses the result of the execution of a single game.
+    Each result line starts like:
+    ksdr,151.16666,ksdr1,151.16666,ksdr2,0.0
+
+    @param result_line: The single line result representing the outcome of a game
+    @return: The name of the team and the score as a tuple
+    """
+    team_info_results = result_line.split(',')
+    if len(team_info_results) == 4:
+        teamname, total_score, survivor1, survivor1_score = team_info_results
+    elif len(team_info_results) == 6:
+        teamname, total_score, survivor1, survivor1_score, survivor2, survivor2_score = team_info_results
+    else:
+        raise ValueError(f"Can't parse result '{result_line}'")
+    return teamname, total_score
 
 
 def get_survivor_name(survivordir):
