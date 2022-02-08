@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-07 00:12+0200\n"
+"POT-Creation-Date: 2022-02-08 20:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -313,14 +313,20 @@ msgid "Status"
 msgstr "מצב: "
 
 #: war/templates/challenges/challenge_base.html:8
+#: war/templates/challenges/challenges.html:16
 msgid "Active"
 msgstr "פעיל"
 
 #: war/templates/challenges/challenge_base.html:8
+#: war/templates/challenges/challenges.html:16
 msgid "Inactive"
 msgstr "לא פעיל"
 
-#: war/templates/challenges/challenge_base.html:18
+#: war/templates/challenges/challenge_base.html:16
+msgid "You must have a group to participate in a challenge."
+msgstr "עליך להיות משוייך לקבוצה על מנת להשתתף באתגרים."
+
+#: war/templates/challenges/challenge_base.html:20
 #, fuzzy
 #| msgid "Challenges"
 msgid "Challenge ended!"
