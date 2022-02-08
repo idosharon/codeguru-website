@@ -13,6 +13,7 @@
         {% if challenge.get_my_model_name == "riddle" %}
         <a href="{% url 'riddle_page' challenge.id %}">{{ challenge.title }}</a> ( {{ challenge.start_date }} -> {{ challenge.end_date }} )
         {% endif %}
+        - {% if challenge.active %}{% trans "Active" %}{% else %}{% trans "Inactive" %}{% endif %}
     </li>
 {% endfor %}
 </ul>

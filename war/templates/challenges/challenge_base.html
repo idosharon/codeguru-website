@@ -12,6 +12,8 @@
 
     {% if user.profile.group %}
         {% block 'challenge_fields' %}{% endblock %}
+    {% else %}
+        {% trans "You must have a group to participate in a challenge." %}
     {% endif %}
 
 {% else %}
