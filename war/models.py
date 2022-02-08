@@ -37,7 +37,7 @@ def war_directory_path(instance, bin):
     if instance.group is None:
         return join("wars", "zombies", str(instance.war.id), uuid4().hex)
     idx = instance.warrior_file_idx
-    name = f"bin_{idx}" if bin else f"asm_{idx}"
+    name = f"{instance.group.center}_{instance.group.name}{idx}" if bin else f"{instance.group.center}_{instance.group.name}{idx}.asm"
     return join("wars", "submissions", str(instance.war.id), instance.group.center + "_" + instance.group.name, name)
 
 
