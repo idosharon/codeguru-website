@@ -71,10 +71,8 @@ def insert_games_results_to_db(team_scores: Dict[str, float]) -> None:
     connection = sqlite3.connect(DATABASE_ADDRESS["NAME"])
     cursor = connection.cursor()
     for team_name, game_score in team_scores:
-        update_query = ("UPDATE codeguru_profile\n"
-                        "SET score = score + {game_score}\n"
-                        "WHERE group = {team_name}").format(team_name=team_name, game_score=game_score)
-        cursor.execute(update_query)
+        update_query = "UPDATE codeguru_profile SET score = score + ? WHERE group = ?"
+        cursor.execute(update_query, (game_score, team_name))
     connection.commit()
 
 
