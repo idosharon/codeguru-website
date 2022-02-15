@@ -1,51 +1,49 @@
-"""
-Manual-ish load scores from csv file
-Points are for scoreboard, not game run points
-
-File format:
-Group,Points
-GSA_Group1,10
-OST_Group2,3
-etc
-"""
-import sqlite3
-
-from django.core.management import BaseCommand, CommandError
+from email.policy import default
+from django.core.management.base import BaseCommand, CommandError
+from codeguru.models import Profile, User, CgGroup
 import pandas as pd
-
-from website.settings import DATABASES
-
-TEAMID_QUERY = "SELECT id FROM codeguru_cggroup where name = ? and center = ?"  # find team id from name and center
-UPDATE_QUERY = "UPDATE codeguru_profile SET score = score + ? WHERE group = ?"  # update scores for a group
-DATABASE_ADDRESSES = DATABASES["default"]
-
+import os
 
 class Command(BaseCommand):
     help = 'Load scores to scoreboard from csv file'
 
     def add_arguments(self, parser):
-        parser.add_argument('file', type=str)
+        parser.add_argument('--file', type=str, required=True, help='File to load scores from')
+        parser.add_argument('--score_func', type=str, default='lambda x: x', help='Score function. (variables: sum, max)')
 
     def handle(self, *args, **options):
-        if not options['file']:
-            raise CommandError('No file name')
 
-        con = sqlite3.connect(DATABASE_ADDRESSES["NAME"])
-        cursor = con.cursor()
-
+        if not options['file'] or not os.path.isfile(options['file']):
+            raise CommandError('File does not exist.')
+        
         def update_score(team: str, score: int) -> None:
             # assumes name is CNT_GroupName (allows underscores in team name)
             center = team.split("_", 1)[0]
-            name = team.split("_", 1)[1]
+            team_name = team.split("_", 1)[1]
 
-            team_id: int = int(cursor.execute(TEAMID_QUERY, (name, center)).fetchone()[0])
-            cursor.execute(UPDATE_QUERY, (team_id, score))
+            self.stdout.write(f"Group: {team_name} Score: {score}")
+            f_score = func(score)
+
+            # get group
+            group = CgGroup.objects.get(name=team_name, center=center)
+            members = Profile.objects.filter(group=group)
+            for member in members:
+                member.score += f_score
+                member.save()
+                self.stdout.write(self.style.SUCCESS(f"{member.user.username} {member.score} (+{f_score})"))
+            
 
         # load file
         results = pd.read_csv(options['file'])
+        # sum scores
+        score_sum = int(results.sum(axis = 1, skipna = True).sum())
+        socre_max = int(results.max(axis = 1, skipna = True).max())
+        try:
+            score_func = options['score_func'].format(sum=score_sum, max=socre_max)
+            print(score_func)
+            func = eval(score_func, globals())
+        except Exception as e:
+            raise CommandError(f'Invalid score function. {e} (allowed variables are: sum, max)')
         # run update statement for each group
-        results.apply(lambda row: update_score(row['Group'], row['Points']), axis=1)
+        results.apply(lambda row: update_score(row[0], row[1]), axis=1)
 
-        # commit changes and close
-        con.commit()
-        con.close()
