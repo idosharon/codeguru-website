@@ -37,10 +37,12 @@ def war_directory_path(instance, bin):
     if instance.group is None:
         return join("wars", "zombies", str(instance.war.id), uuid4().hex)
     idx = instance.warrior_file_idx
-    file_idx = idx - 1 if idx != 1 else ""
+    # This is the line that should run, but we temporarly declare it always 2
+    # file_idx = idx - 1 if idx != 1 else ""
+    file_idx = 2
     name = f"{instance.group.center}_{instance.group.name}{file_idx}" \
         if bin else f"{instance.group.center}_{instance.group.name}{file_idx}.asm"
-    return join("wars", "submissions", str(instance.war.id), instance.group.center + "_" + instance.group.name, name)
+    return join("wars", "submissions", str(instance.war.id), "joined_submissions", name)
 
 
 def riddle_directory_path(instance, filename):
