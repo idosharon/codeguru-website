@@ -21,8 +21,8 @@ CENTER_CHOICES = [
 
 
 def group_name_validator(name):
-    if ' ' in name:
-        raise ValidationError("Spaces are not allowed in group name.")
+    if not name.replace('_', '').isalnum():
+        raise ValidationError("Only alphanumeric characters and underscores are allowed in group name.")
     return name
 
 

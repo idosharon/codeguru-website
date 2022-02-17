@@ -17,7 +17,7 @@
             {{field.label}}
             {{field}}
             {% if prev_upload %}
-                <a href="{% url 'war_download' id=challenge.id filename=field.name %}">{% trans "Download" %}</a>
+                <a href="{% url 'war_download' id=challenge.id fieldname=field.name %}">{% trans "Download" %}</a>
             {% endif %}
             <br>
         {% endfor %} 

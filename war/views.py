@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from .models import RiddleSolution, War, Riddle, Survivor, warrior_storage
+from .models import RiddleSolution, War, Riddle, Survivor, warrior_storage, war_directory_path
 from itertools import chain
 from codeguru.views import error
 from codeguru.models import CgGroup
@@ -40,16 +40,22 @@ def riddle_page(request, id):
 
 
 @login_required
-def download(request, id, filename):
-    if not re.compile(r"(bin|asm)_\d+").match(filename):
-        return HttpResponseNotFound('Not Found: Bad filename')
+def download(request, id, fieldname):
     try:
         group = request.user.profile.group
         war = War.objects.get(id=id)
-        path = join("wars", "submissions", str(war.id), group.center + "_" + group.name, filename)
+
+        idx = fieldname.split('_')[-1]
+        bin = fieldname.split('_')[0] == 'bin'
+
+        folder_name = f"{group.center}_{group.name}" 
+        file_name = folder_name + idx + (".asm" if not bin else '')
+        
+        path = join("wars", "submissions", str(war.id), folder_name, file_name)
+        
         response = FileResponse(warrior_storage.open(
             path, 'rb'), content_type='application/force-download')
-        response['Content-Disposition'] = f'attachment; filename="{filename}"'
+        response['Content-Disposition'] = f'attachment; filename="{file_name}"'
         return response
     except:
         return HttpResponseNotFound('Not Found')
