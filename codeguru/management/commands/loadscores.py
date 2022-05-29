@@ -9,6 +9,7 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument('--file', type=str, required=True, help='File to load scores from')
+        parser.add_argument('--override', type=bool, required=True, help='Choose whether to override existing scores')
         parser.add_argument('--score_func', type=str, default='lambda x: x', help='Score function. (variables: sum, max)')
 
     def handle(self, *args, **options):
@@ -28,7 +29,7 @@ class Command(BaseCommand):
             group = CgGroup.objects.get(name=team_name, center=center)
             members = Profile.objects.filter(group=group)
             for member in members:
-                member.score += f_score
+                member.score = f_score if options['ovverride'] else member.score + f_score
                 member.save()
                 self.stdout.write(self.style.SUCCESS(f"{member.user.username} {member.score} (+{f_score})"))
             
