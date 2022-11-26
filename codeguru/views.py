@@ -83,8 +83,6 @@ def register(request):
                 user = form.save()
             except ValidationError as e:
                 return error(request, f"{' '.join(e)}")
-            if form.errors:
-                return error(request, "Hello")
             login(request, user)
             return redirect("/")
     form = NewUserForm()
