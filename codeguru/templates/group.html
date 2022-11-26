@@ -3,57 +3,66 @@
 
 {% block content %}
 
-{% if user.profile.group %}
+{% if group %}
+
 <div class="row my-3 p-3">
-    <h1>{{user.profile.group.name}}</h1>
-    <p>{{ user.profile.group.center }}</p>
+    <h1>{{group.name}}</h1>
+    <p>{{ group.center }}</p>
     <div>
         <p>{% trans "Group members" %}:</p>
         <ul>
         {% for member in members %}
-            <li>{{member.user.username}} {% if member.user == user.profile.group.owner %}({% trans "Owner" %}){% endif %}
+            <li>{{member.user.username}} 
+                {% if member.user == group.owner %}({% trans "Owner" %}){% endif %}
+                {% if member.user.profile == user.profile %}({% trans "You" %}){% endif %}
             </li>
         {% endfor %}
         </ul>
     </div>
     
-    {% if user == user.profile.group.owner %}
+    {% if user == group.owner %}
         {% if user.profile.group.invite and not is_expired %}<br>
-	{% trans "Use this link to join the group:" %}<br>
-	<a href="http://{{ request.get_host }}{% url 'invite' user.profile.group.invite.code %}">http://{{ request.get_host }}{% url 'invite' user.profile.group.invite.code %}</a>
-        
+	        {% trans "Use this link to join the group:" %}<br>
+	        <a href="http://{{ request.get_host }}{% url 'invite' user.profile.group.invite.code %}">http://{{ request.get_host }}{% url 'invite' user.profile.group.invite.code %}</a>
         {% else %}
-        <p>{% trans "There is no invite code for the group yet, you can create one here:" %}</p>
-        
-        <form method="post" action="{% url 'invite_create' %}">
-            {% csrf_token %}
-            <input type="submit" value="{% trans 'Generate Invite Link' %}" />
-        </form>
+            {% trans "There is no invite code for the group yet, you can create one here:" %}
+            <form method="post" action="{% url 'invite_create' %}">
+                {% csrf_token %}
+                <input type="submit" value="{% trans 'Generate Invite Link' %}" />
+            </form>
         {% endif %}
     {% endif %}
+
+    {% if is_in_group %}
     <form method="post" action="{% url 'leave_group' %}">
         {% csrf_token %}
+        <br>
         <input type="submit" value="{% trans 'Leave Group' %}" />
     </form>
+    {% endif %}
 </div>
+
 {% else %}
+
+{% if not user.profile.group %}
 {% trans "You are not associated with any group, try to create a new one:" %}<br>
 
-{% if CAN_REGISTER %}
+    {% if CAN_REGISTER %}
 
-{% trans "Create Group:" %}<br>
-<form method="post" action=".">
-    {% csrf_token %} 
-    <strong>{% trans "Note: Spaces are not allowed in the group name." %}</strong><br>
-    <strong>{% trans "Note: Center name should be presented using 3 CAPITAL letters in English." %}</strong>
+    {% trans "Create Group:" %}<br>
+    <form method="post" action=".">
+        {% csrf_token %} 
+        <strong>{% trans "Note: Spaces are not allowed in the group name." %}</strong><br>
 
-    {{ form.as_p }}
-  
-    <input type="submit" value="{% trans 'New Group' %}" />
-</form>
+        {{ form.as_p }}
+    
+        <input type="submit" value="{% trans 'New Group' %}" />
+    </form>
 
-{% else %}
-{% trans "Sorry, the registertion has ended." %}
+    {% else %}
+    {% trans "Sorry, the registertion has ended." %}
+    {% endif %}
+
 {% endif %}
 
 {% endif %}

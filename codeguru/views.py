@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from .forms import NewUserForm, NewGroupForm
-from .models import Profile, Invite, CgGroup, User
+from .models import Profile, Invite, CgGroup, User, Center
 from django.contrib.auth.decorators import login_required
 from django.utils.crypto import get_random_string
 from django.utils import translation
@@ -10,6 +10,7 @@ from django.utils.translation import gettext
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from website.settings import CAN_REGISTER
+from django.contrib import messages
 
 def error(request, msg):
     return render(request, "error.html", {"error_message": msg})
@@ -25,28 +26,52 @@ def delete_profile(request):
     request.user.delete()
     return redirect("/")
 
+def group(request, id=None):
+    render_params = {"form": NewGroupForm(), 'CAN_REGISTER': CAN_REGISTER}
 
-@login_required
-def group(request):
-    if request.method == "POST":
-        form = NewGroupForm(request.POST)
-        if form.is_valid():
-            if CgGroup.objects.filter(name=form.cleaned_data["name"]).exists():
-                return error(request, gettext("Group already exists. try choosing another name."))
-            new_group = CgGroup(
-                name=form.cleaned_data["name"], owner=request.user, center=form.cleaned_data["center"])
-            new_group.save()
-            request.user.profile.group = new_group
-            request.user.profile.save()
-            return redirect("group")
+    if (not id) and request.user:
+        if request.user.profile.group:
+            return redirect("group", id=request.user.profile.group.id)
+
+        if request.method == "POST":
+            form = NewGroupForm(request.POST)
+            if form.is_valid():
+                if CgGroup.objects.filter(name=form.cleaned_data["name"]).exists():
+                    return error(request, gettext("Group already exists. try choosing another name."))
+                    
+                new_group = CgGroup(
+                    name=form.cleaned_data["name"], owner=request.user, center=form.cleaned_data["center"])
+                new_group.save()
+                request.user.profile.group = new_group
+                request.user.profile.save()
+
+                return redirect("group", id=new_group.id)
+        
+        return render(request, 'group.html',  render_params)
+    
+    current_group = CgGroup.objects.all().filter(id=id).first()
+    if not current_group:
+        return error(request, "Group not found.")
+    
+    members = Profile.objects.all().filter(group=current_group)
+    
     link_expired = False
     try:
-        link_expired = request.user.profile.group.invite.expired
+        link_expired = current_group.invite.expired
     except:
         link_expired = False
+    
+    return render(request, 'group.html', {  **render_params,
+                                            "is_expired": link_expired, \
+                                            "group": current_group,
+                                            "members": members, \
+                                            "is_in_group": (request.user.profile in members) if request.user.is_authenticated else False
+                                        })
 
-    return render(request, 'group.html', {'CAN_REGISTER':CAN_REGISTER,"form": NewGroupForm(), "is_expired": link_expired, "members": Profile.objects.all().filter(group=request.user.profile.group)})
-
+def center(request, tkr):
+    center = Center.objects.all().filter(ticker=tkr).first()
+    return render(request, 'center.html', {"center": center, 
+                                            "groups": CgGroup.objects.all().filter(center=center)})
 
 def register(request):
     if request.user.is_authenticated:
@@ -56,8 +81,10 @@ def register(request):
         if form.is_valid():
             try:
                 user = form.save()
-            except ValidationError:
-                return error(request, gettext("Email already exists."))
+            except ValidationError as e:
+                return error(request, f"{' '.join(e)}")
+            if form.errors:
+                return error(request, "Hello")
             login(request, user)
             return redirect("/")
     form = NewUserForm()
