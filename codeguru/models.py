@@ -14,33 +14,32 @@ def validate_center(value):
     raise ValidationError("Center should be represented with 3 letters in english.")
 
 INVITE_TIMEOUT = 48
-CENTER_CHOICES = [
-    ('IND', 'Independent'),
-    ('GSA', 'Green Start Academy'),
-]
-
 
 def group_name_validator(name):
     if not name.replace('_', '').isalnum():
         raise ValidationError("Only alphanumeric characters and underscores are allowed in group name.")
     return name
 
+class Center(models.Model):
+    name = models.CharField(max_length=100)
+    ticker = models.CharField(max_length=3, unique=True)
+
+    def __str__(self) -> str:
+        return f"{self.ticker} - {self.name}"
+
+    def save(self, *args, **kwargs):
+        self.ticker = self.ticker.upper()
+        return super(Center, self).save(*args, **kwargs)
 
 class CgGroup(models.Model):
     name = models.CharField(max_length=30, unique=True,
                             validators=[group_name_validator], verbose_name=_("Name"))
     # acronym = models.CharField(max_length=3, validators=[validate_length], unique=True)
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
-    center = models.CharField(
-        max_length=3, validators=[validate_center], default="IND", verbose_name=_("Center"))
+    center = models.ForeignKey(Center, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
-    
-    def save(self, *args, **kwargs):
-        self.center = self.center.upper()
-        return super(CgGroup, self).save(*args, **kwargs)
-
 
 class Invite(models.Model):
     group = models.OneToOneField(CgGroup, on_delete=models.CASCADE)
@@ -67,3 +66,8 @@ def add_profile(sender, instance, created, **kwargs):
     if created:
         p = Profile(user=instance)
         p.save()
+
+class Message(models.Model):
+    title = models.CharField()
+    description = models.TextField()
+    date = models.DateField()

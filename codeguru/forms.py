@@ -1,16 +1,18 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import CgGroup, CENTER_CHOICES
+from .models import CgGroup
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
 
 class NewUserForm(UserCreationForm):
     email = forms.EmailField(required=True, label=_("Email"))
+    first_name = forms.CharField(required=True, label=_("First Name"))
+    last_name = forms.CharField(required=True, label=_("Last Name"))
 
     class Meta:
         model = User
-        fields = ("username", "email", "password1", "password2")
+        fields = ("username", "first_name", "last_name", "email", "password1", "password2")
 
     def save(self, commit=True):
         user = super(NewUserForm, self).save(commit=False)
@@ -27,7 +29,7 @@ class NewUserForm(UserCreationForm):
 class NewGroupForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(NewGroupForm, self).__init__(*args, **kwargs)
-        self.fields['center'].widget.attrs['style'] = "width:50px"
+        # self.fields['center'].widget.attrs['style'] = "width:50px"
 
     class Meta:
         model = CgGroup
