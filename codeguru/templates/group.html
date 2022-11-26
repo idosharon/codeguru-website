@@ -6,8 +6,8 @@
 {% if group %}
 
 <div class="row my-3 p-3">
-    <h1>{{group.name}}</h1>
-    <p>{{ group.center }}</p>
+    <h1>{{ group.center.ticker }}_{{group.name}}</h1>
+    <p><a href="http://{{ request.get_host }}{% url 'center' group.center.ticker }">{{ group.center }}</a></p>
     <div>
         <p>{% trans "Group members" %}:</p>
         <ul>
