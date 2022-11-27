@@ -9,7 +9,7 @@
 <h2>{% trans "Here are the registered groups:" %}</h2>
 <ul>
 {% for group in groups %}
-    <li>{{ group.center }}&nbsp;{{ group.name }}</li>
+    <li><a href="{% url 'group' group.id %}">{{ group.center.ticker }}_{{ group.name }}</a></li>
 {% endfor %}
 </ul>
 
