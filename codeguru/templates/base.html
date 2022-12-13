@@ -6,7 +6,7 @@
 
 <head>
     <link rel="stylesheet" href="{{ STATIC_URL }}style.css" />
-    <title>{% block title %}Codeguru X{% endblock %}</title>
+    <title>{% block title %}Codeguru X 18{% endblock %}</title>
     {% if LANGUAGE_CODE == "he" %}
         <style> html { direction: rtl} </style>
     {% else %}
@@ -35,7 +35,7 @@
         
     {% block header %}
     {% comment %} <img src="{% static 'codeguru/logo.svg' %}" alt="logo" style="height: 7em; margin-bottom: 40px;"/><br> {% endcomment %}
-    <h1>{% trans "CodeGuru Extreme" %}</h1><br>
+    <h1>{% trans "CodeGuru Extreme 18" %}</h1><br>
     <a href="{% url 'index' %}">{% trans "Home" %}</a> | 
 
     {% if user.is_authenticated %}
