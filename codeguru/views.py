@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
-from .forms import NewUserForm, NewGroupForm
-from .models import Profile, Invite, CgGroup, User, Center
+from .forms import NewUserForm, NewGroupForm, NewCenterForm
+from .models import Profile, Invite, CgGroup, User, Center, Message
 from django.contrib.auth.decorators import login_required
 from django.utils.crypto import get_random_string
 from django.utils import translation
@@ -68,10 +68,29 @@ def group(request, id=None):
                                             "is_in_group": (request.user.profile in members) if request.user.is_authenticated else False
                                         })
 
-def center(request, tkr):
+def center(request, tkr: str):
+    if len(tkr) != 3:
+        return error(request, "Sorry the center ticker must be 3 chars")
     center = Center.objects.all().filter(ticker=tkr).first()
     return render(request, 'center.html', {"center": center, 
                                             "groups": CgGroup.objects.all().filter(center=center)})
+
+@login_required
+def new_center(request):
+    if request.user and request.method == "POST":
+        form = NewCenterForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data["name"]
+            ticker = form.cleaned_data["ticker"]
+
+            if Center.objects.filter(ticker=ticker).exists():
+                return error(request, gettext("Center {} already exists.".format(ticker)))
+                
+            new_center = Center(name=name, ticker=ticker)
+            new_center.save()
+            return redirect("group")
+        
+    return render(request, 'new_center.html', {"form": NewCenterForm})
 
 def register(request):
     if request.user.is_authenticated:
@@ -152,4 +171,6 @@ def set_lang(request):
 
 
 def index(request):
-    return render(request, 'index.html', {"groups": CgGroup.objects.all(), "users": User.objects.all()})
+    return render(request, 'index.html', {"groups": CgGroup.objects.all(), 
+                                          "messages": enumerate(Message.objects.order_by('-date')), 
+                                          "users": User.objects.all()})

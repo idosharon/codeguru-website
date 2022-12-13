@@ -44,26 +44,28 @@
 
 {% else %}
 
-{% if not user.profile.group %}
-{% trans "You are not associated with any group, try to create a new one:" %}<br>
+    {% if not user.profile.group %}
+        {% trans "You are not associated with any group, try to create a new one:" %}<br>
 
-    {% if CAN_REGISTER %}
+        {% if CAN_REGISTER %}
 
-    {% trans "Create Group:" %}<br>
-    <form method="post" action=".">
-        {% csrf_token %} 
-        <strong>{% trans "Note: Spaces are not allowed in the group name." %}</strong><br>
+            {% trans "Create Group:" %}<br>
+            <form method="post" action=".">
+                {% csrf_token %} 
+                <strong>{% trans "Note: Spaces are not allowed in the group name." %}</strong><br>
 
-        {{ form.as_p }}
-    
-        <input type="submit" value="{% trans 'New Group' %}" />
-    </form>
+                {{ form.as_p }}
 
-    {% else %}
-    {% trans "Sorry, the registertion has ended." %}
+                <a href="{% url 'new_center' %}">{% trans "Create new center" %}</a><br>
+            
+                <input type="submit" value="{% trans 'New Group' %}" />
+            </form>
+
+        {% else %}
+            {% trans "Sorry, the registertion has ended." %}
+        {% endif %}
+
     {% endif %}
-
-{% endif %}
 
 {% endif %}
 

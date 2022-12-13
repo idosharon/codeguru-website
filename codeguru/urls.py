@@ -8,6 +8,7 @@ urlpatterns = [
     path('', views.index, name="index"),
     path('group/', views.group, name="group"),
     path('group/<int:id>', views.group, name="group"),
+    path('center/create', views.new_center, name="new_center"),
     path('center/<str:tkr>', views.center, name="center"),
     path('accounts/profile/', views.profile, name="profile"),
     path('accounts/profile/delete', views.delete_profile, name="delete_profile"),

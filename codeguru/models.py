@@ -13,6 +13,11 @@ def validate_center(value):
         return value
     raise ValidationError("Center should be represented with 3 letters in english.")
 
+def validate_length(number, length=10):
+    if len(str(number)) != length:
+        raise ValidationError(u'%s is not the correct length' % number)
+
+
 INVITE_TIMEOUT = 48
 
 def group_name_validator(name):
@@ -51,23 +56,22 @@ class Invite(models.Model):
     def expired(self):
         return False
 
-
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     group = models.ForeignKey(CgGroup, null=True, on_delete=models.SET_NULL)
     score = models.IntegerField(default=0)
+    phone = models.CharField(max_length=10, validators=[validate_length], verbose_name=_("Phone Number"))
 
     def __str__(self):
         return f"Profile of {self.user.username}"
 
-
-@receiver(post_save, sender=User)
-def add_profile(sender, instance, created, **kwargs):
-    if created:
-        p = Profile(user=instance)
-        p.save()
-
 class Message(models.Model):
-    title = models.CharField()
+    title = models.CharField(max_length=255)
     description = models.TextField()
     date = models.DateField()
+
+    def __str__(self) -> str:
+        return f"{self.title} ({self.date})"
+
+    def save(self, *args, **kwargs):
+        return super(Message, self).save(*args, **kwargs)
