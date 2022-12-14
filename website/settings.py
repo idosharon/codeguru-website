@@ -36,9 +36,9 @@ else:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = not IS_PRODUCTION
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cgx.codeguru.co.il']
 if IS_PRODUCTION:
-    ALLOWED_HOSTS = ['young.codeguru.co.il','young.codeguru.co.il']
+    ALLOWED_HOSTS = ['cgx.codeguru.co.il', 'cgx.codeguru.co.il']
 USE_I18N = True
 TIME_ZONE = "Asia/Jerusalem"
 

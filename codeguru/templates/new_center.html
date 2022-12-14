@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+{% trans "Create Center:" %}<br>
+<form method="post" action="{% url 'new_center' %}">
+    {% csrf_token %} 
+    <strong>{% trans "Note: Ticker must be 3 chars long." %}</strong><br>
+
+    {{ form.as_p }}
+
+    <input type="submit" value="{% trans 'Create New Center' %}" />
+</form>
+
+
+{% endblock content %}

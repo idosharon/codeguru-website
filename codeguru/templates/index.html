@@ -5,13 +5,42 @@
 <h1>{% trans "Codeguru Extreme (Young)" %}!</h1>
 {% trans "If you are not young you might want to go" %} <a href="http://submit.codeguru.co.il">{% trans "here" %}</a><br>
 {% trans "Welcome to Codeguru Extreme Young! Here are the registered groups:" %}
+
 <h2>{% trans "Statistics:" %}</h2>
 {% trans "Number of Groups: " %}{{ groups.count }}<br>
 {% trans "Number of Users: " %}{{ users.count }}
+
+<h2>{% trans "Messages board:" %}</h2>
+<ul style="overflow-y: scroll; max-height:400px;">
+    {% for i, msg in messages %}
+        {% if LANGUAGE_CODE == 'en' %}
+            <li>
+                <strong>{{ msg.title_en|safe }} ({{ msg.date }})</strong>
+                <br>
+                <p>
+                {{ msg.description_en|safe|linebreaks }}
+                </p>
+            </li>
+        {% else %}
+            <li>
+                <strong>{{ msg.title_he|safe }} ({{ msg.date }})</strong>
+                <br>
+                <p>
+                {{ msg.description_he|safe|linebreaks }}
+                </p>
+            </li>
+        {% endif %}
+        
+        <br>
+    {% empty %}
+        {% trans "No messages yet. stay tuned." %}
+    {% endfor %}
+</ul>
+
 <h2>{% trans "Here are the registered groups:" %}</h2>
 <ul>
 {% for group in groups %}
-    <li>{{ group.center }}&nbsp;{{ group.name }}</li>
+    <li><a href="{% url 'group' group.id %}">{{ group.center.ticker }}_{{ group.name }}</a></li>
 {% endfor %}
 </ul>
 

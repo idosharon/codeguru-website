@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-08 20:07+0200\n"
+"POT-Creation-Date: 2022-12-14 18:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,13 +23,25 @@ msgstr ""
 msgid "Email"
 msgstr "מייל"
 
-#: codeguru/models.py:31
+#: codeguru/forms.py:10
+msgid "First Name"
+msgstr "שם פרטי"
+
+#: codeguru/forms.py:11
+msgid "Last Name"
+msgstr "שם משפחה"
+
+#: codeguru/forms.py:12 codeguru/models.py:63
+msgid "Phone Number"
+msgstr "מספר טלפון"
+
+#: codeguru/forms.py:34 codeguru/models.py:41
 msgid "Name"
 msgstr "שם"
 
-#: codeguru/models.py:35
-msgid "Center"
-msgstr "מרכז"
+#: codeguru/forms.py:35
+msgid "Ticker"
+msgstr "סמל"
 
 #: codeguru/templates/base.html:39
 msgid "CodeGuru Extreme (Young)"
@@ -80,55 +92,55 @@ msgstr "עברית"
 msgid "English"
 msgstr "אנגלית"
 
-#: codeguru/templates/group.html:11
+#: codeguru/templates/group.html:12
 msgid "Group members"
 msgstr "חברי הקבוצה"
 
-#: codeguru/templates/group.html:14
+#: codeguru/templates/group.html:16
 msgid "Owner"
 msgstr "מייסד"
 
-#: codeguru/templates/group.html:22
+#: codeguru/templates/group.html:17
+msgid "You"
+msgstr "אתה"
+
+#: codeguru/templates/group.html:25
 msgid "Use this link to join the group:"
 msgstr "השתמש בלינק הזה כדי להיכנס לקבוצה:"
 
-#: codeguru/templates/group.html:26
+#: codeguru/templates/group.html:28
 msgid "There is no invite code for the group yet, you can create one here:"
 msgstr "אין לינק הזמנה לקבוצה עדיין, ניתן ליצור אחד כאן:"
 
-#: codeguru/templates/group.html:30
+#: codeguru/templates/group.html:31
 msgid "Generate Invite Link"
 msgstr "צור קישור הזמנה"
 
-#: codeguru/templates/group.html:36
+#: codeguru/templates/group.html:40
 msgid "Leave Group"
 msgstr "צא מהקבוצה"
 
-#: codeguru/templates/group.html:40
+#: codeguru/templates/group.html:48
 msgid "You are not associated with any group, try to create a new one:"
 msgstr "אינך משוייך לשום קבוצה, אתה יכול ליצור אחת חדשה כאן:"
 
-#: codeguru/templates/group.html:44
+#: codeguru/templates/group.html:52
 msgid "Create Group:"
 msgstr "צור קבוצה:"
 
-#: codeguru/templates/group.html:47
+#: codeguru/templates/group.html:55
 msgid "Note: Spaces are not allowed in the group name."
 msgstr "שים לב: אין להשתמש ברווחים בשם הקבוצה."
 
-#: codeguru/templates/group.html:48
-#, fuzzy
-#| msgid ""
-#| "Note: Center name should be presented using 3 capital letters in English."
-msgid ""
-"Note: Center name should be presented using 3 CAPITAL letters in English."
-msgstr "שים לב: שם המרכז חייב להיות מורכב מ-3 אותיות גדולות באנגלית."
+#: codeguru/templates/group.html:59
+msgid "Create new center"
+msgstr "צור מרכז חדש"
 
-#: codeguru/templates/group.html:52
+#: codeguru/templates/group.html:61
 msgid "New Group"
 msgstr "קבוצה חדשה"
 
-#: codeguru/templates/group.html:56
+#: codeguru/templates/group.html:65
 msgid "Sorry, the registertion has ended."
 msgstr "ההרשמה נסגרה."
 
@@ -158,9 +170,29 @@ msgstr "מספר הקבוצות: "
 msgid "Number of Users: "
 msgstr "מספר המשתמשים: "
 
-#: codeguru/templates/index.html:9
+#: codeguru/templates/index.html:11
+msgid "Messages board:"
+msgstr "הודעות:"
+
+#: codeguru/templates/index.html:23
+msgid "No messages yet. stay tuned."
+msgstr "אין הודעות כרגע."
+
+#: codeguru/templates/index.html:27
 msgid "Here are the registered groups:"
 msgstr "להלן הקבוצות הרשומות:"
+
+#: codeguru/templates/new_center.html:6
+msgid "Create Center:"
+msgstr "צור קבוצה:"
+
+#: codeguru/templates/new_center.html:9
+msgid "Note: Ticker must be 3 chars long."
+msgstr "שים לב: סמל המרכז חייב להיות באורך 3 אותיות."
+
+#: codeguru/templates/new_center.html:13
+msgid "Create New Center"
+msgstr "צור מרכז חדש"
 
 #: codeguru/templates/profile.html:7
 msgid "Your score is"
@@ -274,31 +306,31 @@ msgstr "הרשמה כרגע סגורה"
 msgid "You are now registered. Activation email sent."
 msgstr "נרשמת בהצלחה. נשלח מייל להפעלה."
 
-#: codeguru/views.py:34
+#: codeguru/views.py:40
 msgid "Group already exists. try choosing another name."
 msgstr "שם הקבוצה תפוס. יש לבחור שם אחר."
 
-#: codeguru/views.py:59
-msgid "Email already exists."
-msgstr "כתובת מייל"
+#: codeguru/views.py:87
+msgid "Center {} already exists."
+msgstr "המרכז {} כבר קיים."
 
-#: codeguru/views.py:69
+#: codeguru/views.py:114
 msgid "You must leave your group first."
 msgstr "עליך לעזוב את הקבוצה שלך תחילה."
 
-#: codeguru/views.py:73
+#: codeguru/views.py:118
 msgid "Invite expired."
 msgstr "תוקף ההזמנה פג."
 
-#: codeguru/views.py:80
+#: codeguru/views.py:125
 msgid "Invalid Invite link."
-msgstr "צור קישור הזמנה"
+msgstr "קישור הקבוצה לא תקין."
 
-#: codeguru/views.py:86
+#: codeguru/views.py:131
 msgid "You do not have a group."
 msgstr "אינך משוייך לאף קבוצה."
 
-#: codeguru/views.py:88
+#: codeguru/views.py:133
 msgid "Only an owner can create a group invite."
 msgstr "רק מייסד קבוצה יכול ליצור הזמנה."
 
@@ -334,7 +366,7 @@ msgstr "עליך להיות משוייך לקבוצה על מנת להשתתף �
 
 #: war/templates/challenges/challenge_base.html:20
 msgid "Challenge ended!"
-msgstr "אתגרים"
+msgstr "האתגר הסתיים!"
 
 #: war/templates/challenges/challenges.html:5
 msgid "Active Challenges"
@@ -371,19 +403,29 @@ msgstr "הורדה"
 msgid "Riddle not found"
 msgstr "החידה לא נמצאה."
 
-#: war/views.py:68
+#: war/views.py:74
 msgid "Upload failed. This challenge is inactive."
 msgstr "העלאה נכשלה. החידה לא פעילה."
 
-#: war/views.py:81
+#: war/views.py:87
 msgid "War not found"
 msgstr "אתגר המלחמה לא נמצא."
 
+#~ msgid "New Center"
+#~ msgstr "מרכז חדש"
+
+#, fuzzy
+#~| msgid ""
+#~| "Note: Center name should be presented using 3 capital letters in English."
+#~ msgid ""
+#~ "Note: Center name should be presented using 3 CAPITAL letters in English."
+#~ msgstr "שים לב: שם המרכז חייב להיות מורכב מ-3 אותיות גדולות באנגלית."
+
+#~ msgid "Codeguru Extreme"
+#~ msgstr "קודגורו אקסטרים"
+
 #~ msgid "This invite will be valid for the next 48 hours."
 #~ msgstr "ההזמנה הזו תהיה תקפה ל48 שעות הבאות."
-
-#~ msgid "Messages"
-#~ msgstr "הודעות"
 
 #~ msgid "Enter a valid email address."
 #~ msgstr "אנא הכנס כתובת מייל תקינה."
@@ -410,11 +452,6 @@ msgstr "אתגר המלחמה לא נמצא."
 #, fuzzy
 #~| msgid "Not member"
 #~ msgid "September"
-#~ msgstr "לא משתמש"
-
-#, fuzzy
-#~| msgid "Not member"
-#~ msgid "November"
 #~ msgstr "לא משתמש"
 
 #, fuzzy
