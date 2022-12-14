@@ -31,6 +31,9 @@ class NewUserForm(UserCreationForm):
         return user
 
 class NewCenterForm(forms.ModelForm):
+    name = forms.CharField(max_length=50,required=True, label=_("Name"))
+    ticker = forms.CharField(max_length=3, min_length=3, required=True, label=_("Ticker"))
+
     def __init__(self, *args, **kwargs):
         super(NewCenterForm, self).__init__(*args, **kwargs)
     

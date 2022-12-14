@@ -7,15 +7,27 @@
 {% trans "Number of Groups: " %}{{ groups.count }}<br>
 {% trans "Number of Users: " %}{{ users.count }}
 
-
 <h2>{% trans "Messages board:" %}</h2>
 <ul style="overflow-y: scroll; max-height:400px;">
     {% for i, msg in messages %}
-        <li>
-        <strong>{{ msg.title|safe }} ({{ msg.date }})</strong>
-        <br>
-        {{ msg.description|safe }}
-        </li>
+        {% if LANGUAGE_CODE == 'en' %}
+            <li>
+                <strong>{{ msg.title_en|safe }} ({{ msg.date }})</strong>
+                <br>
+                <p>
+                {{ msg.description_en|safe|linebreaks }}
+                </p>
+            </li>
+        {% else %}
+            <li>
+                <strong>{{ msg.title_he|safe }} ({{ msg.date }})</strong>
+                <br>
+                <p>
+                {{ msg.description_he|safe|linebreaks }}
+                </p>
+            </li>
+        {% endif %}
+        
         <br>
     {% empty %}
         {% trans "No messages yet. stay tuned." %}

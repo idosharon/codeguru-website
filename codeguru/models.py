@@ -26,7 +26,7 @@ def group_name_validator(name):
     return name
 
 class Center(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=50)
     ticker = models.CharField(max_length=3, unique=True)
 
     def __str__(self) -> str:
@@ -66,12 +66,16 @@ class Profile(models.Model):
         return f"Profile of {self.user.username}"
 
 class Message(models.Model):
-    title = models.CharField(max_length=255)
-    description = models.TextField()
+    title_he = models.CharField(max_length=255)
+    title_en = models.CharField(max_length=255)
+
+    description_he = models.TextField()
+    description_en = models.TextField()
+
     date = models.DateField()
 
     def __str__(self) -> str:
-        return f"{self.title} ({self.date})"
+        return f"{self.title_en} ({self.date})"
 
     def save(self, *args, **kwargs):
         return super(Message, self).save(*args, **kwargs)
