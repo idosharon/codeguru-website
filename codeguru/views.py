@@ -116,6 +116,8 @@ def invite(request, code):
         invite = Invite.objects.get(code=code)
         if invite.expired:
             return error(request, gettext("Invite expired."))
+        if Profile.objects.filter(group=invite.group).count() >= 3:
+            return error(request, gettext("Sorry groups must be 3 members max."))
         if request.user.profile.group != invite.group:
             leave_group(request)
         request.user.profile.group = invite.group

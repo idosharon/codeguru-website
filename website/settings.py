@@ -146,7 +146,7 @@ if cg_user and cg_paswd:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = 'smtp.gmail.com'
     EMAIL_PORT = 587
-    EMAIL_HOST_USER = cg_user + '@codeguru.co.il'
+    EMAIL_HOST_USER = cg_user + '@gmail.com'
     EMAIL_HOST_PASSWORD = cg_paswd
     EMAIL_USE_TLS = True
 else:
