@@ -36,9 +36,9 @@ else:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = not IS_PRODUCTION
 
-ALLOWED_HOSTS = ['cgx.codeguru.co.il']
+ALLOWED_HOSTS = ['cgx.codeguru.co.il', '127.0.0.1', 'localhost']
 if IS_PRODUCTION:
-    ALLOWED_HOSTS = ['cgx.codeguru.co.il', 'cgx.codeguru.co.il']
+    ALLOWED_HOSTS = ['cgx.codeguru.co.il']
 USE_I18N = True
 TIME_ZONE = "Asia/Jerusalem"
 
@@ -82,8 +82,11 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+                'django.contrib.messages.context_processors.messages'
             ],
+            'libraries': {
+                'war_extras': 'war.templatetags.war_extras',
+            }
         },
     },
 ]

@@ -1,3 +1,4 @@
+from __future__ import annotations
 from django.utils import timezone
 from django.db import models
 from django.core.validators import FileExtensionValidator, MinValueValidator
@@ -19,6 +20,8 @@ class Challenge(models.Model):
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
 
+    required_riddles = models.ManyToManyField("Riddle", symmetrical=False, blank=True)
+
     class Meta:
         abstract = True
 
@@ -32,27 +35,20 @@ class Challenge(models.Model):
     def __str__(self):
         return self.start_date.strftime("%Y-%m-%d")+":"+self.end_date.strftime("%Y-%m-%d")+"_"+self.title
 
+def format_path(instance, file_idx, bin):
+    return f"{instance.group.center.ticker}_{instance.group.name}_{file_idx}" + ("" if bin else ".asm")
 
 def war_directory_path(instance, bin):
     if instance.group is None:
         return join("wars", "zombies", str(instance.war.id), uuid4().hex)
-    idx = instance.warrior_file_idx
-    # This is the line that should run, but we temporarly declare it always 2
-    # file_idx = idx - 1 if idx != 1 else ""
-    file_idx = 2
-    name = f"{instance.group.center}_{instance.group.name}{file_idx}" \
-        if bin else f"{instance.group.center}_{instance.group.name}{file_idx}.asm"
+    idx = str(instance.warrior_file_idx)
+    name = format_path(instance, idx, bin)
+
     return join("wars", "submissions", str(instance.war.id), "joined_submissions", name)
 
 
 def riddle_directory_path(instance, filename):
     return join("riddles", str(instance.riddle.id), str(instance.group.id), "solution.zip")
-
-
-class War(Challenge):
-    amount_of_survivors = models.PositiveIntegerField(
-        default=2, validators=[MinValueValidator(1)])
-    zombie_mode = models.BooleanField(default=False)
     
 
 def bin_max(value):
@@ -73,6 +69,15 @@ def asm_max(value):
 
 def asm_surv_upload(instance, _): return war_directory_path(instance, False)
 def bin_surv_upload(instance, _): return war_directory_path(instance, True)
+
+class Riddle(Challenge):
+    pass
+
+class War(Challenge):
+    amount_of_survivors = models.PositiveIntegerField(
+        default=2, validators=[MinValueValidator(1)])
+    zombie_mode = models.BooleanField(default=False)
+    required_wars = models.ManyToManyField('self', symmetrical=False, blank=True)
 
 
 class Survivor(models.Model):
@@ -97,14 +102,10 @@ def warrior_file_idx_modifier(sender, **kwargs):
 
 pre_init.connect(warrior_file_idx_modifier, Survivor)
 
-
-class Riddle(Challenge):
-    pass
-
-
 class RiddleSolution(models.Model):
     riddle = models.ForeignKey(Riddle, on_delete=models.CASCADE)
     group = models.ForeignKey(CgGroup, null=True, on_delete=models.CASCADE)
     riddle_solution = models.FileField(
-        upload_to=riddle_directory_path, storage=warrior_storage)
+        upload_to=riddle_directory_path, storage=warrior_storage, 
+        validators=[FileExtensionValidator(allowed_extensions=['zip'])])
     upload_date = models.DateTimeField(auto_now_add=True)

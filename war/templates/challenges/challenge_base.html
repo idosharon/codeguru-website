@@ -1,23 +1,48 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load war_extras %}
 
 {% block content %}
 
 <b>{{ challenge.title }}</b> ( {{ challenge.start_date }} -> {{ challenge.end_date }} )
-<h2>{% trans "Description" %}:</h2>{{ challenge.description }}<br>
-{% trans "Status" %}: <strong>{% if challenge.active %}{% trans "Active" %}{% else %}{% trans "Inactive" %}{% endif %}</strong>
-<br>
 
-{% if challenge.active %}
+{% if solved_requirements %}
 
-    {% if user.profile.group %}
-        {% block 'challenge_fields' %}{% endblock %}
+    <h2>{% trans "Description" %}:</h2>
+        {{ challenge.description|safe|linebreaks }}
+        <br>
+        {% trans "Status" %}: <strong>{% if challenge.active %}{% trans "Active" %}{% else %}{% trans "Inactive" %}{% endif %}</strong>
+    <br>
+
+    {% if challenge.active %}
+
+        {% if user.profile.group %}
+            {% block 'challenge_fields' %}{% endblock %}
+        {% else %}
+            {% trans "You must have a group to participate in a challenge." %}
+        {% endif %}
+
     {% else %}
-        {% trans "You must have a group to participate in a challenge." %}
+        {% trans "Challenge ended!" %}
     {% endif %}
 
 {% else %}
-    {% trans "Challenge ended!" %}
+    <br><br>
+    {% if required %}
+        {% trans "required riddles to unlock this one are:" %}
+        <ul>
+        {% for challenge in required %}
+            <li>
+                {% if challenge.0|classname == "Riddle" %}
+                    <a href="{% url 'riddle_page' challenge.0.id %}">{{ challenge.0.title }}</a>
+                {% else %}
+                    <a href="{% url 'war_page' challenge.0.id %}">{{ challenge.0.title }}</a>
+                {% endif %}
+                 - {{ challenge.1|yesno:"Solved,Didn't solve" }} ({{challenge.0|classname}})</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
 {% endif %}
 
 {% endblock %}
