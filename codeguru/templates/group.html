@@ -23,7 +23,7 @@
     {% if user == group.owner %}
         {% if user.profile.group.invite and not is_expired %}<br>
 	        {% trans "Use this link to join the group:" %}<br>
-	        <a href="{% url 'invite' user.profile.group.invite.code %}">http://{{ request.get_host }}{% url 'invite' user.profile.group.invite.code %}</a>
+	        <a href="{% url 'invite' user.profile.group.invite.code %}">https://{{ request.get_host }}{% url 'invite' user.profile.group.invite.code %}</a>
         {% else %}
             {% trans "There is no invite code for the group yet, you can create one here:" %}
             <form method="post" action="{% url 'invite_create' %}">

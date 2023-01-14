@@ -36,11 +36,13 @@ else:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = not IS_PRODUCTION
 
-ALLOWED_HOSTS = ['cgx.codeguru.co.il']
+ALLOWED_HOSTS = ['cgx.codeguru.co.il', '127.0.0.1', 'localhost']
 if IS_PRODUCTION:
-    ALLOWED_HOSTS = ['cgx.codeguru.co.il', 'cgx.codeguru.co.il']
+    ALLOWED_HOSTS = ['cgx.codeguru.co.il']
 USE_I18N = True
 TIME_ZONE = "Asia/Jerusalem"
+
+FORCE_SCRIPT_NAME = '/young' if IS_PRODUCTION else None
 
 # Application definition
 
@@ -82,8 +84,11 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+                'django.contrib.messages.context_processors.messages'
             ],
+            'libraries': {
+                'war_extras': 'war.templatetags.war_extras',
+            }
         },
     },
 ]
@@ -146,7 +151,7 @@ if cg_user and cg_paswd:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = 'smtp.gmail.com'
     EMAIL_PORT = 587
-    EMAIL_HOST_USER = cg_user + '@codeguru.co.il'
+    EMAIL_HOST_USER = cg_user + '@gmail.com'
     EMAIL_HOST_PASSWORD = cg_paswd
     EMAIL_USE_TLS = True
 else:

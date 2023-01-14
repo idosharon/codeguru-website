@@ -103,7 +103,7 @@ def register(request):
             except ValidationError as e:
                 return error(request, f"{' '.join(e)}")
             login(request, user)
-            return redirect("/")
+            return redirect("/young/")
     form = NewUserForm()
     return render(request, "registration/registration_form.html", {"form": form})
 
@@ -116,11 +116,13 @@ def invite(request, code):
         invite = Invite.objects.get(code=code)
         if invite.expired:
             return error(request, gettext("Invite expired."))
+        if Profile.objects.filter(group=invite.group).count() >= 3:
+            return error(request, gettext("Sorry groups must be 3 members max."))
         if request.user.profile.group != invite.group:
             leave_group(request)
         request.user.profile.group = invite.group
         request.user.profile.save()
-        return redirect("/group/")
+        return redirect("group")
     except Invite.DoesNotExist:
         return error(request, gettext("Invalid Invite link."))
 
@@ -138,7 +140,7 @@ def create_invite(request):
         invite = Invite(group=request.user.profile.group,
                         code=get_random_string(64))
         invite.save()
-    return redirect("/group/")
+    return redirect("group")
 
 
 @login_required
@@ -154,7 +156,7 @@ def leave_group(request):
             if request.user == group.owner:
                 group.owner = Profile.objects.all().filter(group=group).first().user
             group.save()
-    return redirect("/group/")
+    return redirect("group")
 
 
 def set_lang(request):
