@@ -1,5 +1,5 @@
 from django import forms
-from .models import Riddle, Survivor, RiddleSolution, War, asm_max, bin_max
+from .models import Riddle, Survivor, RiddleSolution, War, asm_max, bin_max, survivor_signature
 from django.utils.translation import gettext_lazy as _
 
 class SurvivorSubmissionForm(forms.Form):
@@ -12,7 +12,7 @@ class SurvivorSubmissionForm(forms.Form):
                 label=_("Assembly source file: "), validators=[asm_max])
             self.fields[f'asm_{i}'].group = i
             self.fields[f'bin_{i}'] = forms.FileField(
-                label=_("Binary file: "), validators=[bin_max])
+                label=_("Binary file: "), validators=[bin_max, survivor_signature])
             self.fields[f'bin_{i}'].group = i
 
 
