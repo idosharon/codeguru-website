@@ -36,7 +36,7 @@ class Challenge(models.Model):
         return self.start_date.strftime("%Y-%m-%d")+":"+self.end_date.strftime("%Y-%m-%d")+"_"+self.title
 
 def format_path(instance, file_idx, bin):
-    return f"{instance.group.center.ticker}_{instance.group.name}_{file_idx}" + ("" if bin else ".asm")
+    return f"{instance.group.center.ticker}_{instance.group.name}{file_idx}" + ("" if bin else ".asm")
 
 def war_directory_path(instance, bin):
     if instance.group is None:
@@ -57,6 +57,17 @@ def bin_max(value):
         raise ValidationError("Too large.")
     else:
         return value
+
+
+def survivor_signature(value):
+    bytes = value.file.read()
+    if bytes:
+        for i, byte in enumerate(bytes):
+            if i % 49 == 0 and not byte == 0x90:
+                raise ValidationError('Invalid signature.')
+        return value
+    else:
+        raise ValidationError('Invalid signature.')
 
 
 def asm_max(value):
