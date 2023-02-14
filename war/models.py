@@ -53,7 +53,7 @@ def riddle_directory_path(instance, filename):
 
 def bin_max(value):
     filesize = value.size
-    if filesize > 512:
+    if filesize > 300:
         raise ValidationError("Too large.")
     else:
         return value
